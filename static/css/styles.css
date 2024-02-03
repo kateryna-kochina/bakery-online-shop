@@ -1,0 +1,47 @@
+@import url('variables.css');
+
+body {
+    background-color: var(--primary);
+    color: var(--secondary);
+    font-family: 'Actor', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.navbar,
+.navbar-menu {
+    background-color: var(--primary);
+}
+
+.navbar-brand img {
+    height: 50px;
+    max-height: 100%;
+}
+
+.navbar-end a.navbar-item {
+    background-color: var(--primary);
+    color: var(--secondary);
+    font-size: large;
+    margin: auto 15px;
+}
+
+.navbar-link.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+a.navbar-item.is-active,
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover {
+    background-color: var(--primary);
+    color: var(--tertiary);
+}
+
+.navbar-burger {
+    color: var(--secondary);
+    height: inherit;
+}
+
+.navbar-burger:hover span {
+    background-color: var(--tertiary);
+}

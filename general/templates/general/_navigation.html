@@ -1,6 +1,40 @@
-<nav>
-    <ul>
-      <li><a href="{{ url_for('general.home') }}">Home</a></li>
-      <li><a href="{{ url_for('general.about') }}">About</a></li>
-    </ul>
-  </nav>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand is-flex is-justify-content-center">
+        <a class="navbar-item" href="{{url_for('general.home')}}">
+            <img
+                src="{{ url_for('static', filename='img/logo.svg')}}"
+                alt="logo"
+            />
+        </a>
+        <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="nav-menu"
+        >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="nav-menu" class="navbar-menu is-shadowless">
+        <div class="navbar-start is-flex is-justify-content-center"></div>
+        <div class="navbar-end is-flex is-justify-content-center">
+            
+            <a class="navbar-item" href="">
+                <strong>Menu</strong>
+            </a>
+
+            <a class="navbar-item" href="{{ url_for('general.about') }}">
+                <strong>About</strong>
+            </a>
+
+            <a class="navbar-item" href="">
+                <strong>Login</strong>
+            </a>
+
+        </div>
+    </div>
+</nav>
