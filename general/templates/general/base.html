@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Bakery - {% block title %}{% endblock title %}</title>
+        <title>BAKERY</title>
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
@@ -26,21 +26,7 @@
     </head>
 
     <body>
-        <!-- <h1 class="title">Bakery Website</h1> -->
-        {% include('general/_navigation.html') %}
-        <section class="hero has-text-centered">
-            <div class="hero-body">
-                <div class="container">
-                    <div class="columns is-centered">
-                        <h2 class="subtitle">
-                            {% block header %}{% endblock header %}
-                        </h2>
-                        {% block content %}
-                        <p>No products.</p>
-                        {% endblock content %}
-                    </div>
-                </div>
-            </div>
-        </section>
+        {% include('general/navigation.html') %}
+        {% block content %}{% endblock content %}
     </body>
 </html>

@@ -8,6 +8,64 @@ body {
     font-style: normal;
 }
 
+.button {
+    background-color: var(--tertiary);
+    border-color: var(--tertiary);
+    color: var(--primary-tint-1);
+    margin-right: 25px;
+}
+
+.button.is-primary {
+    background-color: var(--tertiary);
+    border-color: var(--tertiary);
+    color: var(--primary-tint-1);
+}
+
+.button.is-primary.is-outlined {
+    background-color: var(--tertiary);
+    border-color: var(--tertiary);
+    color: var(--primary-tint-1);
+}
+
+.button.is-primary.is-outlined.is-focused,
+.button.is-primary.is-outlined.is-hovered,
+.button.is-primary.is-outlined:focus,
+.button.is-primary.is-outlined:hover,
+.button.is-primary.is-outlined:focus-visible {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--primary-tint-1);
+}
+
+.is-brighter-button {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--primary-tint-1);
+    margin-right: 25px;
+}
+
+.is-brighter-button.is-primary {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--primary-tint-1);
+}
+
+.is-brighter-button.is-primary.is-outlined {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--primary-tint-1);
+}
+
+.is-brighter-button.is-primary.is-outlined.is-focused,
+.is-brighter-button.is-primary.is-outlined.is-hovered,
+.is-brighter-button.is-primary.is-outlined:focus,
+.is-brighter-button.is-primary.is-outlined:hover,
+.is-brighter-button.is-primary.is-outlined:focus-visible {
+    background-color: var(--tertiary);
+    border-color: var(--tertiary);
+    color: var(--primary-tint-1);
+}
+
 .navbar,
 .navbar-menu {
     background-color: var(--primary);
@@ -18,7 +76,7 @@ body {
     max-height: 100%;
 }
 
-.navbar-end a.navbar-item {
+a.navbar-item {
     background-color: var(--primary);
     color: var(--secondary);
     font-size: large;
@@ -44,4 +102,23 @@ a.navbar-item:hover {
 
 .navbar-burger:hover span {
     background-color: var(--tertiary);
+}
+
+.subtitle {
+    color: var(--secondary);
+    font-size: 40px;
+}
+
+.is-mid-size-text {
+    font-size: 20px;
+}
+
+.is-large-size-text {
+    font-size: 30px;
+}
+
+.has-lighter-background {
+    background-color: var(--primary-tint-1);
+    color: var(--tertiary);
+    font-size: 25px;
 }
