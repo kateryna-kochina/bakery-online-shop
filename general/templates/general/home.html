@@ -1,4 +1,4 @@
-{% extends 'general/base.html' %}
+{% extends 'general/base.html' %} 
 
 {% block content %}
 
@@ -20,7 +20,9 @@
                 class="columns is-flex is-justify-content-center has-text-centered"
             >
                 <div class="column is-6">
-                    <h2 class="is-size-2 mb-4 is-secondary-color">WELCOME TO THE BAKERY</h2>
+                    <h2 class="is-size-2 mb-4 is-secondary-color">
+                        WELCOME TO THE BAKERY
+                    </h2>
                     <p class="is-size-5 mb-6">
                         Embark on a delightful journey with our freshly crafted
                         delights, meticulously made from premium ingredients.
@@ -30,33 +32,6 @@
 
                     <a class="button is-primary is-rounded is-outlined">
                         <strong>MAKE ORDER</strong>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="hero is-fullheight has-primary-tint-1-background">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-7">
-                    <p class="is-size-4 mb-6">
-                        <b class="is-size-3"> BAKERY </b>
-                        is more than a mere confectionery, it's a place where
-                        the ethereal aroma of freshly baked delights intertwines
-                        with the joyous anticipation of sweet dreams
-                        materializing into reality. Step into our world, where
-                        each treat is a masterpiece crafted with passion, and
-                        every visit is a journey into the extraordinary
-                    </p>
-
-                    <a
-                        class="button is-primary is-rounded is-outlined"
-                        href="{{ url_for('general.about')}}"
-                    >
-                        <strong>ABOUT</strong>
                     </a>
                 </div>
             </div>

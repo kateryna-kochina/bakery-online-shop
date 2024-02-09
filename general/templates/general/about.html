@@ -1,9 +1,156 @@
-{% extends 'general/base.html' %} 
+{% extends 'general/base.html' %} {% block content %}
 
-{% block header %}
-<h1 class="subtitle">About the bakery</h1>
-{% endblock header %}
+<section class="hero is-halfheight">
+    <div class="hero-body">
+        <div class="container">
+            <div
+                class="columns is-flex is-justify-content-center is-vcentered has-text-centered"
+            >
+                <div class="column is-7">
+                    <h2 class="is-size-2 mb-4 is-secondary-color is-uppercase">
+                        The Bakery: A Tale of Passion and Flour
+                    </h2>
+                    <p class="is-size-5 mb-6">
+                        Welcome, dear friends, to the Bakery!
+                        <br />
+                        As the small yellow bird behind this magical venture, I
+                        am thrilled to share with you the story of how this
+                        dream bakery came to be. From the moment I hatched from
+                        my cozy nest, I knew that my destiny lay in the world of
+                        baking. The aroma of fresh baked goods and the sight of
+                        golden pastries dancing in the morning sunlight ignited
+                        a fire within me, a passion that would guide me on an
+                        extraordinary journey.
+                    </p>
+                </div>
+                <div class="column is-3 is-offset-1">
+                    <figure class="image is-2by3">
+                        <img
+                            src="{{ url_for('static', filename='img/dreaming-sunny.png')}}"
+                            alt="dreaming-sunny"
+                        />
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-{% block content %}
+<section class="hero is-halfheight">
+    <div class="hero-body">
+        <div class="container">
+            <div
+                class="columns is-flex is-justify-content-center is-vcentered has-text-centered"
+            >
+                <div class="column is-3">
+                    <figure class="image is-2by3">
+                        <img
+                            src="{{ url_for('static', filename='img/learning-sunny.png')}}"
+                            alt="learning-sunny"
+                        />
+                    </figure>
+                </div>
+                <div class="column is-7 is-offset-1">
+                    <p class="is-size-5 mb-6">
+                        With determination in my heart and a sprinkle of
+                        curiosity, I embarked on a quest to learn the art of
+                        baking. I sought wisdom from the wise old owl, who
+                        generously shared the secrets of kneading dough and
+                        coaxing flavors from simple ingredients. With each
+                        lesson learned, my dream grew brighter, fueling my
+                        desire to create something truly special. Through
+                        countless hours of practice and experimentation, I honed
+                        my skills and crafted recipes that captured the essence
+                        of joy and warmth. From fluffy rolls to decadent cakes
+                        adorned with berries plucked from the forest, every
+                        creation was a labor of love, infused with the magic of
+                        the forest that surrounded me.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-halfheight">
+    <div class="hero-body">
+        <div class="container">
+            <div
+                class="ccolumns is-flex is-justify-content-center is-vcentered has-text-centered"
+            >
+                <div class="column is-7">
+                    <p class="is-size-5 mb-6">
+                        When the time came to share my creations with the world,
+                        I knew that I had found the perfect spot for my dream
+                        bakery. In a quaint clearing bathed in sunlight and
+                        serenaded by the gentle rustle of leaves, the Bakery
+                        came to life. With the help of my forest friends, we
+                        transformed the space into a whimsical haven, where the
+                        scent of freshly baked goods mingled with the laughter
+                        of customers. Word of our little bakery spread like
+                        wildfire, drawing creatures from far and wide to sample
+                        our delights. From busy bees buzzing in for
+                        honey-sweetened treats to sleepy owls seeking a
+                        pick-me-up from our aromatic coffee, each visitor added
+                        to the vibrant tapestry of life that filled our bakery
+                        with warmth and joy.
+                    </p>
+                </div>
+                <div class="column is-3 is-offset-1">
+                    <figure class="image is-square">
+                        <img
+                            src="{{ url_for('static', filename='img/cooking-sunny.png')}}"
+                            alt="cooking-sunny"
+                        />
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-halfheight">
+    <div class="hero-body">
+        <div class="container">
+            <div
+                class="columns is-flex is-justify-content-center is-vcentered has-text-centered"
+            >
+                <div class="column is-3">
+                    <figure class="image">
+                        <img
+                            src="{{ url_for('static', filename='img/baking-left.png')}}"
+                            alt="baking-left"
+                        />
+                    </figure>
+                </div>
+                <div class="column is-6">
+                    <p class="is-size-5 mb-6">
+                        Beyond the hustle and bustle of daily life, what truly
+                        fills my heart with happiness is knowing that I have
+                        found my purpose, my calling in life. To create moments
+                        of sweetness and delight, to bring smiles to the faces
+                        of those who walk through our doors that is the true
+                        magic of the Bakery. So, dear friends, I invite you to
+                        join us on this enchanting journey. Whether you're a
+                        curious traveler passing through the forest or a local
+                        seeking a taste of home, know that you are always
+                        welcthe the Bakery, where every treat tells a story of
+                        passion and flour.
+                        <br />
+                        With love and gratitude, Sunny
+                    </p>
+                </div>
+                <div class="column is-3">
+                    <figure class="image">
+                        <img
+                            src="{{ url_for('static', filename='img/baking-right.png')}}"
+                            alt="baking-right"
+                        />
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}
