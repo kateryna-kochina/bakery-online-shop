@@ -1,4 +1,7 @@
-{% extends 'general/base.html' %} {% block content %}
+{% extends 'general/base.html' %}
+
+{% block content %}
+
 <section class="hero is-fullheight is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container">
@@ -6,23 +9,24 @@
                 <div class="column is-8">
                     <figure class="image is-16by9">
                         <img
-                            src="{{ url_for('static', filename='img/home-img.png')}}"
+                            src="{{ url_for('static', filename='img/home.png')}}"
                             alt="home-img"
                         />
                     </figure>
                 </div>
             </div>
 
-            <div class="columns is-flex is-justify-content-center has-text-centered">
+            <div
+                class="columns is-flex is-justify-content-center has-text-centered"
+            >
                 <div class="column is-6">
-                    <h2 class="subtitle">WELCOME TO THE BAKERY</h2>
-                    <p class="is-mid-size-text">
+                    <h2 class="is-size-2 mb-4 is-secondary-color">WELCOME TO THE BAKERY</h2>
+                    <p class="is-size-5 mb-6">
                         Embark on a delightful journey with our freshly crafted
                         delights, meticulously made from premium ingredients.
                         Enhance your moments with the irresistible allure of our
                         treats, ensuring a joyous and festive experience for you
                     </p>
-                    <br />
 
                     <a class="button is-primary is-rounded is-outlined">
                         <strong>MAKE ORDER</strong>
@@ -33,13 +37,13 @@
     </div>
 </section>
 
-<section class="hero is-fullheight has-lighter-background">
+<section class="hero is-fullheight has-primary-tint-1-background">
     <div class="hero-body">
         <div class="container">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-7">
-                    <p class="is-secondary-text">
-                        <b class="is-large-size-text"> BAKERY </b>
+                    <p class="is-size-4 mb-6">
+                        <b class="is-size-3"> BAKERY </b>
                         is more than a mere confectionery, it's a place where
                         the ethereal aroma of freshly baked delights intertwines
                         with the joyous anticipation of sweet dreams
@@ -47,9 +51,9 @@
                         each treat is a masterpiece crafted with passion, and
                         every visit is a journey into the extraordinary
                     </p>
-                    <br />
+
                     <a
-                        class="button is-primary is-rounded is-outlined is-brighter-button"
+                        class="button is-primary is-rounded is-outlined"
                         href="{{ url_for('general.about')}}"
                     >
                         <strong>ABOUT</strong>
@@ -60,17 +64,27 @@
     </div>
 </section>
 
-<section class="hero is-fullheight">
+<section class="hero is-fullheight has-primary-tint-1-background">
     <div class="hero-body">
         <div class="container">
-            <div class="columns is-flex is-justify-content-center has-text-centered">
-                <div class="column is-8">
-                    <p class="is-mid-size-text is-secondary-color-text">
+            <div
+                class="columns is-flex is-justify-content-center has-text-centered is-vcentered"
+            >
+                <div class="column is-4">
+                    <figure class="image">
+                        <img
+                            src="{{ url_for('static', filename='img/create-own.png')}}"
+                            alt="create-own-img"
+                        />
+                    </figure>
+                </div>
+                <div class="column is-1"></div>
+                <div class="column is-5">
+                    <p class="is-size-5 mb-6">
                         With the bakery, here is a space where you have the
                         opportunity to explore your imagination and craft your
                         own one-of-a-kind baked creations
                     </p>
-                    <br />
                     <a class="button is-primary is-rounded is-outlined">
                         <strong>CREATE YOUR OWN</strong>
                     </a>

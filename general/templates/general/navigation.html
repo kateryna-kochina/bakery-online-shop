@@ -2,7 +2,7 @@
     <div class="navbar-brand is-flex is-justify-content-center">
         <a class="navbar-item" href="{{url_for('general.home')}}">
             <img
-                src="{{ url_for('static', filename='img/logo.svg')}}"
+                src="{{ url_for('static', filename='img/logo.png')}}"
                 alt="logo"
             />
         </a>
@@ -19,19 +19,21 @@
         </a>
     </div>
 
-    <div id="nav-menu" class="navbar-menu is-shadowless">
+    <div id="nav-menu" class="navbar-menu is-shadowless has-text-weight-bold">
         <div class="navbar-start is-flex is-justify-content-center"></div>
         <div class="navbar-end is-flex is-justify-content-center">
-            <a class="navbar-item" href="">
-                <strong>Menu</strong>
-            </a>
+            <a class="navbar-item" href=""> Products </a>
 
             <a class="navbar-item" href="{{ url_for('general.about') }}">
-                <strong>About</strong>
+                About
             </a>
+            <a class="navbar-item" href=""> Login </a>
 
             <a class="navbar-item" href="">
-                <strong>Login</strong>
+                <img
+                    src="{{ url_for('static', filename='img/cart-outline.svg')}}"
+                    alt="cart-img"
+                />
             </a>
         </div>
     </div>
