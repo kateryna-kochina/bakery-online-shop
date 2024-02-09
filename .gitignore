@@ -6,6 +6,7 @@ data/
 
 # Ignore environment-specific files
 .env
+.flaskenv
 
 # Ignore compiled Python files
 *.pyc
