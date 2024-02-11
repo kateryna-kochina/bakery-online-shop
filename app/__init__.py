@@ -1,10 +1,11 @@
 from flask import Flask
 
 from config import Config
+from populate_database import populate_database
 
-from .database import db, setup_database
-from .general.general import general_bp
-from .products.products import products_bp
+from .database import db
+from .general.routes import general_bp
+from .products.routes import products_bp
 
 
 def create_app():
@@ -27,7 +28,26 @@ def create_app():
         return app
 
     except Exception as e:
-
         print(f'Error occurred during app initialization: {e}')
 
         return None
+
+
+def setup_database(app):
+    from .products.models import Category, Product
+
+    with app.app_context():
+        try:
+            db.create_all()
+            print('Database tables created successfully.')
+
+            if Category.query.count() == 0:
+                populate_database()
+                db.session.commit()
+                print('Database populated with data.')
+            else:
+                print('Database already populated.')
+
+        except Exception as e:
+            db.session.rollback()
+            print('Error setting up database:', e)

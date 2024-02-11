@@ -4,8 +4,10 @@ __pycache__/
 temp/
 
 # Ignore db files and folders
-instance/
+# instance/
+/instance
 *.db
+*.sqlite3
 
 # Ignore environment-specific files
 .env
