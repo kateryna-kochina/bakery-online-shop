@@ -2,7 +2,10 @@
 __pycache__/
 .pytest_cache
 temp/
-data/
+
+# Ignore db files and folders
+instance/
+*.db
 
 # Ignore environment-specific files
 .env
