@@ -1,21 +1,22 @@
-{% extends 'general/base.html' %} {% block content %}
+{% extends 'general/base.html' %} 
+
+{% block content %}
 
 <section class="hero is-fullheight is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container">
 
-            {% for category in range(3) %}
-            <h2>Category</h2>
+            <!-- {% for category in range(3) %}
+            <h2>Category</h2> -->
             <div class="columns is-multiline">
                 <br />
-                {% for i in range(10) %}
+                {% for product in products %}
                 <div class="column is-one-third">
-                    <span>PRODUCT CARD</span>
                     {% include ('products/product_card.html') %}
                 </div>
                 {% endfor %}
             </div>
-            {% endfor %}
+            <!-- {% endfor %} -->
             
         </div>
     </div>

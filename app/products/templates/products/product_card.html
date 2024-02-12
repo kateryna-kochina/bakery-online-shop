@@ -1,34 +1,91 @@
-<div class="card">
+<div class="card has-text-centered">
     <div class="card-image">
-        <figure class="image is-4by3">
+        <figure class="image is-square">
             <img
-                src="https://bulma.io/images/placeholders/1280x960.png"
+                src="{{ url_for('static', filename=product.img_path)}}"
                 alt="Placeholder image"
             />
         </figure>
     </div>
     <div class="card-content">
         <div class="media">
-            <div class="media-left">
-                <figure class="image is-48x48">
-                    <img
-                        src="https://bulma.io/images/placeholders/96x96.png"
-                        alt="Placeholder image"
-                    />
-                </figure>
-            </div>
             <div class="media-content">
-                <p class="title is-4">John Smith</p>
-                <p class="subtitle is-6">@johnsmith</p>
+                <div class="columns">
+                <div class="column is-9 has-text-left mb-4">
+                    <a class="title is-6 is-uppercase" href=""
+                        >{{ product.title }}</a
+                    >
+                </div>
+                <div class="column is-3 has-text-right">
+                    <span class="subtitle is-6"
+                        >${{ product.price }}.00</span
+                    >
+                </div>
             </div>
-        </div>
 
-        <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            nec iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-            <a href="#">#responsive</a>
-            <br />
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                <div class= "is-vcentered my-2">
+                    <form id="itemForm" action="#" method="POST">
+                        <div class="columns">
+                            <div class="column is-flex is-vcentered is-fullwidth">
+                                <p class="control mx-1">
+                                    <button
+                                        id="minusButton"
+                                        type="button"
+                                        class="button is-primary is-outlined"
+                                    >
+                                        -
+                                    </button>
+                                </p>
+
+                                <p class="control mx-1">
+                                    <input
+                                        id="itemAmount"
+                                        name="itemAmount"
+                                        class="input has-text-centered"
+                                        type="number"
+                                        value="1"
+                                        min="1"
+                                        disabled
+                                    />
+                                </p>
+
+                                <p class="control mx-1">
+                                    <button
+                                        id="plusButton"
+                                        type="button"
+                                        class="button is-primary is-outlined"
+                                    >
+                                        +
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="field mx-1">
+                            <p class="control">
+                                <button
+                                    type="submit"
+                                    class="button is-primary is-rounded is-outlined is-fullwidth has-text-weight-bold"
+                                >
+                                    ADD TO CART
+                                </button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
+
+    <!-- {% block content %}
+<div class="container">
+    <h1 class="heading">Select Movie</h1>
+    {% for movie in options %}
+    <p>
+        <a href="{{ url_for('find_movie', id=movie.id) }}"> {{ movie.name }}</a>
+    </p>
+    {% endfor %}
+</div>
+{% endblock %} -->
 </div>

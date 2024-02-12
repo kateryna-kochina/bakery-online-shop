@@ -91,6 +91,17 @@ a.footer-item img {
     margin: 15px;
 }
 
+.content-item img {
+    height: 35px;
+    max-height: 100%;
+}
+
+label.radio {
+    background-color: transparent;
+    color: var(--secondary);
+
+}
+
 .navbar-link.is-active,
 .navbar-link:focus,
 .navbar-link:focus-within,
@@ -127,4 +138,10 @@ a.footer-item:hover {
 
 #copyright a:hover {
     color: var(--tertiary);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
