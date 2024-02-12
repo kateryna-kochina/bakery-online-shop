@@ -1,91 +1,36 @@
-<div class="card has-text-centered">
-    <div class="card-image">
+<div class="card is-shadowless">
+    <div class="card-image has-relative-position">
         <figure class="image is-square">
             <img
                 src="{{ url_for('static', filename=product.img_path)}}"
-                alt="Placeholder image"
+                alt="product-image"
             />
         </figure>
-    </div>
-    <div class="card-content">
-        <div class="media">
-            <div class="media-content">
-                <div class="columns">
-                <div class="column is-9 has-text-left mb-4">
-                    <a class="title is-6 is-uppercase" href=""
-                        >{{ product.title }}</a
-                    >
-                </div>
-                <div class="column is-3 has-text-right">
-                    <span class="subtitle is-6"
-                        >${{ product.price }}.00</span
-                    >
-                </div>
-            </div>
-
-                <div class= "is-vcentered my-2">
-                    <form id="itemForm" action="#" method="POST">
-                        <div class="columns">
-                            <div class="column is-flex is-vcentered is-fullwidth">
-                                <p class="control mx-1">
-                                    <button
-                                        id="minusButton"
-                                        type="button"
-                                        class="button is-primary is-outlined"
-                                    >
-                                        -
-                                    </button>
-                                </p>
-
-                                <p class="control mx-1">
-                                    <input
-                                        id="itemAmount"
-                                        name="itemAmount"
-                                        class="input has-text-centered"
-                                        type="number"
-                                        value="1"
-                                        min="1"
-                                        disabled
-                                    />
-                                </p>
-
-                                <p class="control mx-1">
-                                    <button
-                                        id="plusButton"
-                                        type="button"
-                                        class="button is-primary is-outlined"
-                                    >
-                                        +
-                                    </button>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="field mx-1">
-                            <p class="control">
-                                <button
-                                    type="submit"
-                                    class="button is-primary is-rounded is-outlined is-fullwidth has-text-weight-bold"
-                                >
-                                    ADD TO CART
-                                </button>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
+        <div class="has-absolute-position has-top-right-position">
+            <form id="itemForm" action="#" method="POST">
+                <button
+                    type="submit"
+                    class="add-button button is-primary is-rounded is-outlined has-text-weight-bold"
+                >
+                    <img
+                        src="{{ url_for('static', filename='img/add-outline.svg')}}"
+                        alt="add"
+                    />
+                    ADD TO CART
+                </button>
+            </form>
         </div>
     </div>
-
-    <!-- {% block content %}
-<div class="container">
-    <h1 class="heading">Select Movie</h1>
-    {% for movie in options %}
-    <p>
-        <a href="{{ url_for('find_movie', id=movie.id) }}"> {{ movie.name }}</a>
-    </p>
-    {% endfor %}
-</div>
-{% endblock %} -->
+    <div class="columns is-aligned-top mt-1">
+        <div class="column is-one-third has-text-left">
+            <span class="card-content-item is-size-5 has-text-weight-bold"
+                >${{ product.price }}.00</span
+            >
+        </div>
+        <div class="column is-two-thirds has-text-right">
+            <a class="card-content-item is-size-6" href="#"
+                >{{ product.title }}</a
+            >
+        </div>
+    </div>
 </div>

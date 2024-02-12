@@ -1,6 +1,9 @@
 @import url('variables.css');
 
-body {
+body,
+.card,
+.navbar,
+.navbar-menu {
     background-color: var(--primary);
     color: var(--tertiary);
     font-family: 'Actor', sans-serif;
@@ -12,8 +15,17 @@ body {
     color: var(--secondary);
 }
 
-.has-primary-tint-1-background {
-    background-color: var(--primary-tint-1);
+.has-relative-position {
+    position: relative;
+}
+
+.has-absolute-position {
+    position: absolute;
+}
+
+.has-top-right-position {
+    top: 10px;
+    right: 10px;
 }
 
 .button {
@@ -66,23 +78,10 @@ body {
     color: var(--primary-tint-1);
 }
 
-.navbar,
-.navbar-menu {
-    background-color: var(--primary);
-}
-
 .navbar-brand img,
 .navbar-item img {
     height: 35px;
     max-height: 100%;
-}
-
-a.navbar-item,
-a.footer-item {
-    background-color: var(--primary);
-    color: var(--secondary);
-    font-size: large;
-    margin: auto 15px;
 }
 
 a.footer-item img {
@@ -91,15 +90,33 @@ a.footer-item img {
     margin: 15px;
 }
 
-.content-item img {
-    height: 35px;
-    max-height: 100%;
+a.navbar-item,
+a.footer-item {
+    background-color: var(--primary);
+    color: var(--secondary);
+    margin: auto 15px;
 }
 
-label.radio {
-    background-color: transparent;
-    color: var(--secondary);
+.card {
+    padding: 10px;
+}
 
+.card-content-item {
+    background-color: var(--primary);
+    color: var(--tertiary);
+}
+
+a.card-content-item.is-active,
+a.card-content-item:focus,
+a.card-content-item:focus-within,
+a.card-content-item:hover {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+.add-button img {
+    height: 20px;
+    max-height: 100%;
 }
 
 .navbar-link.is-active,
@@ -140,8 +157,8 @@ a.footer-item:hover {
     color: var(--tertiary);
 }
 
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+} */

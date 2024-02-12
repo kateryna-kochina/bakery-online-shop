@@ -1,6 +1,7 @@
 :root {
-    --primary: #dcf0fa;
-    --primary-tint-1: #f5ffff;
+    /* --primary: #dcf0fa; */
+    --primary: #ffffff;
+    --primary-tint-1: #ffffff;
     --primary-tint-2: #ffffff;
     --primary-tint-3: #ffffff;
 
