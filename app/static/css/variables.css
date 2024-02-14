@@ -1,9 +1,5 @@
 :root {
-    /* --primary: #dcf0fa; */
     --primary: #ffffff;
-    --primary-tint-1: #ffffff;
-    --primary-tint-2: #ffffff;
-    --primary-tint-3: #ffffff;
 
     --secondary: #f06e5a;
     --secondary-tint-1: #ff9480;
@@ -17,6 +13,4 @@
 
     --grey: #9e9e9e;
     --grey-tint-1: #dedede;
-    --grey-tint-2: #ffffff;
-    --grey-tint-3: #ffffff;
 }

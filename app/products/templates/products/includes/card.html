@@ -1,0 +1,25 @@
+<div class="card is-shadowless">
+    <div class="card-image has-relative-position">
+        <a class="" href="#">
+            <figure class="image is-square">
+                <img
+                    src="{{ url_for('static', filename=product.img_path)}}"
+                    alt="product-image"
+                />
+            </figure>
+        </a>
+        {% include ('products/includes/add_button.html') %}
+    </div>
+    <div class="columns is-aligned-top mt-1">
+        <div class="column is-one-third has-text-left">
+            <span class="card-content-item is-size-5 has-text-weight-bold"
+                >${{ product['price'] }}.00</span
+            >
+        </div>
+        <div class="column is-two-thirds has-text-right">
+            <a class="card-content-item is-size-5 is-capitalized" href="#"
+                >{{ product['title'] }}</a
+            >
+        </div>
+    </div>
+</div>

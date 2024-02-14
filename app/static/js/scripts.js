@@ -14,21 +14,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle plus and minus button functionality
-  const minusButton = document.getElementById('minusButton');
-  const plusButton = document.getElementById('plusButton');
-  const itemAmountInput = document.getElementById('itemAmount');
-
-  minusButton.addEventListener('click', function () {
-    let currentValue = parseInt(itemAmountInput.value);
-    if (currentValue > 1) {
-      itemAmountInput.value = currentValue - 1;
-    }
-  });
-
-  plusButton.addEventListener('click', function () {
-    let currentValue = parseInt(itemAmountInput.value);
-    itemAmountInput.value = currentValue + 1;
-  });
-
 });

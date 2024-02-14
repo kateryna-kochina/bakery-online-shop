@@ -6,7 +6,7 @@ body,
 .navbar-menu {
     background-color: var(--primary);
     color: var(--tertiary);
-    font-family: 'Actor', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -31,19 +31,19 @@ body,
 .button {
     background-color: var(--tertiary);
     border-color: var(--tertiary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
 .button.is-primary {
     background-color: var(--tertiary);
     border-color: var(--tertiary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
 .button.is-primary.is-outlined {
     background-color: var(--tertiary);
     border-color: var(--tertiary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
 .button.is-primary.is-outlined.is-focused,
@@ -53,19 +53,19 @@ body,
 .button.is-primary.is-outlined:focus-visible {
     background-color: var(--secondary);
     border-color: var(--secondary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
 .button.is-warning {
     background-color: var(--secondary);
     border-color: var(--secondary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
 .button.is-warning.is-outlined {
     background-color: var(--secondary);
     border-color: var(--secondary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
 .button.is-warning.is-outlined.is-focused,
@@ -75,30 +75,24 @@ body,
 .button.is-warning.is-outlined:focus-visible {
     background-color: var(--tertiary);
     border-color: var(--tertiary);
-    color: var(--primary-tint-1);
+    color: var(--primary);
 }
 
-.navbar-brand img,
-.navbar-item img {
+.navbar-brand img {
     height: 35px;
     max-height: 100%;
 }
 
-a.footer-item img {
-    height: 30px;
-    max-height: 100%;
-    margin: 15px;
-}
-
 a.navbar-item,
-a.footer-item {
+a.footer-item,
+a.level-item {
     background-color: var(--primary);
     color: var(--secondary);
     margin: auto 15px;
 }
 
 .card {
-    padding: 10px;
+    padding: 15px;
 }
 
 .card-content-item {
@@ -109,20 +103,14 @@ a.footer-item {
 a.card-content-item.is-active,
 a.card-content-item:focus,
 a.card-content-item:focus-within,
-a.card-content-item:hover {
+a.card-content-item:hover,
+a.level-item.is-active:focus,
+a.level-item.is-active:focus-within,
+a.level-item.is-active:hover {
     background-color: var(--primary);
     color: var(--secondary);
 }
 
-.add-button img {
-    height: 20px;
-    max-height: 100%;
-}
-
-.navbar-link.is-active,
-.navbar-link:focus,
-.navbar-link:focus-within,
-.navbar-link:hover,
 a.navbar-item.is-active,
 a.navbar-item:focus,
 a.navbar-item:focus-within,
@@ -130,7 +118,12 @@ a.navbar-item:hover,
 a.footer-item.is-active,
 a.footer-item:focus,
 a.footer-item:focus-within,
-a.footer-item:hover {
+a.footer-item:hover,
+#copyright a:hover,
+a.level-item.is-active,
+a.level-item:focus,
+a.level-item:focus-within,
+a.level-item:hover {
     background-color: var(--primary);
     color: var(--tertiary);
 }
@@ -153,12 +146,6 @@ a.footer-item:hover {
     color: var(--secondary);
 }
 
-#copyright a:hover {
-    color: var(--tertiary);
+ion-icon {
+    color: var(--secondary);
 }
-
-/* input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-} */
