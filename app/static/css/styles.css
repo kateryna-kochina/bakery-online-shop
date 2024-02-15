@@ -15,6 +15,10 @@ body,
     color: var(--secondary);
 }
 
+.is-tertiary-color {
+    color: var(--tertiary);
+}
+
 .has-relative-position {
     position: relative;
 }
@@ -76,6 +80,28 @@ body,
     background-color: var(--tertiary);
     border-color: var(--tertiary);
     color: var(--primary);
+}
+
+.button.is-info {
+    background-color: transparent;
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.button.is-info.is-outlined {
+    background-color: transparent;
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.button.is-info.is-outlined.is-focused,
+.button.is-info.is-outlined.is-hovered,
+.button.is-info.is-outlined:focus,
+.button.is-info.is-outlined:hover,
+.button.is-info.is-outlined:focus-visible {
+    background-color: transparent;
+    border-color: var(--tertiary);
+    color: var(--tertiary);
 }
 
 .navbar-brand img {
@@ -148,4 +174,10 @@ a.level-item:hover {
 
 ion-icon {
     color: var(--secondary);
+}
+
+ion-icon:focus,
+ion-icon:hover,
+ion-icon:focus-visible {
+    color: var(--tertiary);
 }

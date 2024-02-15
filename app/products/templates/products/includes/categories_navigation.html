@@ -1,17 +1,18 @@
-<nav class="level is-uppercase has-text-weight-bold is-size-6 mb-5">
+<nav class="level is-uppercase has-text-weight-bold is-size-6">
     <div
         class="level-start is-flex-desktop is-inline-mobile is-justify-content-center is-vcentered mx-3"
     >
         <a
             class="level-item {% if not active_category %} is-active {% endif %}"
-            href="{{ url_for('products.show_products')}}"
+            href="{{ url_for('products.show_products') }}"
+            style="margin-left: 0;"
         >
             All
         </a>
         {% for category in categories %}
         <a
             class="level-item {% if category['name'] == active_category %} is-active {% endif %}"
-            href="/products/{{ category['name'] | lower }}"
+            href="{{ url_for('products.show_products_by_category', active_category=category['name']) }}"
         >
             {{ category['name'] }}
         </a>
@@ -21,7 +22,7 @@
     <div
         class="level-end is-flex-desktop is-inline-mobile is-justify-content-center"
     >
-        <a class="level-item button is-warning is-outlined is-rounded" href="">
+        <a class="level-item button is-info is-outlined is-rounded" href="">
             Create Your Own
         </a>
     </div>

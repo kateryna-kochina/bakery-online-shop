@@ -17,5 +17,6 @@ class Product(db.Model):
     title = Column(String(100), nullable=False)
     price = Column(Integer, nullable=False)
     img_path = Column(String(255), nullable=False)
+    description = Column(String(255), nullable=False)
 
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)

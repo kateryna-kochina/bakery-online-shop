@@ -23,7 +23,9 @@ def populate_database():
                         title=row['title'],
                         price=int(row['price']),
                         img_path=row['img_path'],
-                        category_id=int(row['category_id'])
+                        description=row['description'],
+                        category_id=int(row['category_id'],
+                        )
                     )
                     db.session.add(product)
 

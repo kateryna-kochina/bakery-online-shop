@@ -1,31 +1,41 @@
-{% extends 'general/base.html' %} 
+{% extends 'products/products_base.html' %} {% block content_products %}
 
-{% block content %}
+<div class="columns">
+    <div class="column is-6 is-flex is-justify-content-center mx-2">
+        <figure class="image is-fullwidth">
+            <img
+                src="{{ url_for('static', filename=product.img_path)}}"
+                alt="product-image"
+            />
+        </figure>
+    </div>
 
+    <div class="column is-5 mx-4">
+        <div class="product-title pb-6">
+            <h2 class="title is-uppercase is-tertiary-color">
+                {{ product.title}}
+            </h2>
+        </div>
 
-<section class="hero is-fullheight is-fullheight-with-navbar">
-    <div class="hero-body">
-        <div class="container">
-            {% include ('products/includes/categories_navigation.html') %}
+        <div class="product-decription pb-6">
+            <p class="has-text-justified is-size-6">
+                {{ product.description }}
+            </p>
+        </div>
 
-            <div class="columns is-vcentered">
-                <div
-                    class="column is-4 is-offset-1 is-flex is-justify-content-center"
-                >
-                    <figure class="image">
-                        <img
-                            src="{{ url_for('static', filename=product.img_path)}}"
-                            alt="product-image"
-                        />
-                    </figure>
+        <div class="select-form pt-6">
+            <span class="subtitle is-uppercase is-size-5 has-text-weight-bold">
+                Select Your Number of Treats
+            </span>
+            <form>
+                <div class="select-options columns">
+                    <div class="column is-one-third">1 slice</div>
+                    <div class="column is-one-third">half of cake</div>
+                    <div class="column is-one-third"></div>
                 </div>
-                <div class="column">
-                    <h2 class="title">it is product page</h2>
-
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-</section>
+</div>
 
-{% endblock content %}
+{% endblock content_products %}

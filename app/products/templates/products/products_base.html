@@ -1,0 +1,14 @@
+{% extends 'general/base.html' %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-body">
+            {% include ('products/includes/categories_navigation.html') %} 
+
+            {% block content_products %} {% endblock content_products %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

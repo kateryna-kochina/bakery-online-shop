@@ -1,36 +1,28 @@
-{% extends 'general/base.html' %}
+{% extends 'products/products_base.html' %}
 
-{% block content %}
+{% block content_products %}
 
-<section class="hero is-fullheight is-fullheight-with-navbar">
-    <div class="hero-body">
-        <div class="container">
-            {% include ('products/includes/categories_navigation.html') %} 
-            
-            {% if categories_data %}
-            <div class="columns is-multiline">
-                {% for category_data in categories_data %}
-                    {% for product in category_data['products'] %}
-                    <div class="column is-one-third">
-                        {% include ('products/includes/product_card.html') %}
-                    </div>
-                    {% endfor %}
-                {% endfor %}
+    {% if categories_data %}
+    <div class="columns is-multiline">
+        {% for category_data in categories_data %}
+            {% for product in category_data['products'] %}
+            <div class="column is-one-third">
+                {% include ('products/includes/product_card.html') %}
             </div>
-            {% else %}
-
-            <div class="columns is-multiline">
-                {% for category_data in categories_data %}
-                    {% for product in category_data['products'] %}
-                    <div class="column is-one-third">
-                        {% include ('products/includes/product_card.html') %}
-                    </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
+            {% endfor %}
+        {% endfor %}
     </div>
-</section>
+    {% else %}
 
-{% endblock content %}
+    <div class="columns is-multiline">
+        {% for category_data in categories_data %}
+            {% for product in category_data['products'] %}
+            <div class="column is-one-third">
+                {% include ('products/includes/product_card.html') %}
+            </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %} 
+
+{% endblock content_products %}

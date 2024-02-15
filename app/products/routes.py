@@ -31,8 +31,7 @@ def show_products():
         # Query products associated with the current category
         products = get_products_by_category(category.name)
         # Store products in the dictionary with the category name as the key
-        products_by_category[category.name] = [{'id': product.id,
-                                                'title': product.title,
+        products_by_category[category.name] = [{'title': product.title,
                                                 'price': product.price,
                                                 'img_path': product.img_path
                                                 } for product in products]
@@ -70,7 +69,6 @@ def show_products_by_category(active_category):
     # Prepare data for the requested category
     categories_data = [{'name': active_category,
                         'products': [{
-                            'id': product.id,
                             'title': product.title,
                             'price': product.price,
                             'img_path': product.img_path
@@ -84,7 +82,7 @@ def show_products_by_category(active_category):
 
 
 def capitalize_title(title):
-    # Split the sentence into words
+    # Split the title into words
     words = title.split('-')
 
     # Capitalize each word
@@ -101,17 +99,19 @@ def show_product_details(category, product_title):
     # Convert title to same format as it is in db
     product_title = capitalize_title(product_title)
 
-    print(category)
-
-    print(product_title)
+    # Get categories from db to display them for navigation
+    categories = db.session.query(Category).all()
 
     # Retrieve product details by category and product name
     product = db.session.query(Product).join(Category).filter(
         Category.name == category, Product.title == product_title).first()
-
+    
     if product:
         # Render the template with the product details
-        return render_template('products/product.html', product=product)
+        return render_template('products/product.html', 
+                               product=product, 
+                               categories=categories, 
+                               active_category=category)
     else:
         # If product not found, redirect to products page
         return redirect(url_for('products.show_products'))
