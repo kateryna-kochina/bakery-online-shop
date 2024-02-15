@@ -1,0 +1,31 @@
+{% extends 'general/base.html' %} 
+
+{% block content %}
+
+
+<section class="hero is-fullheight is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container">
+            {% include ('products/includes/categories_navigation.html') %}
+
+            <div class="columns is-vcentered">
+                <div
+                    class="column is-4 is-offset-1 is-flex is-justify-content-center"
+                >
+                    <figure class="image">
+                        <img
+                            src="{{ url_for('static', filename=product.img_path)}}"
+                            alt="product-image"
+                        />
+                    </figure>
+                </div>
+                <div class="column">
+                    <h2 class="title">it is product page</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

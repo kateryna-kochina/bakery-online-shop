@@ -9,21 +9,19 @@
             All
         </a>
         {% for category in categories %}
-
         <a
             class="level-item {% if category['name'] == active_category %} is-active {% endif %}"
-            href="/products?category={{ category['name'] | lower }}"
+            href="/products/{{ category['name'] | lower }}"
         >
             {{ category['name'] }}
         </a>
-
         {% endfor %}
     </div>
 
     <div
         class="level-end is-flex-desktop is-inline-mobile is-justify-content-center"
     >
-        <a class="level-item button is-warning is-outlined is-rounded" href="#">
+        <a class="level-item button is-warning is-outlined is-rounded" href="">
             Create Your Own
         </a>
     </div>

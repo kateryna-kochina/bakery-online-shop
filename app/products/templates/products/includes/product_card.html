@@ -1,6 +1,6 @@
 <div class="card is-shadowless">
     <div class="card-image has-relative-position">
-        <a class="" href="#">
+        <a href="/products/{{ category_data['name'].lower() }}/{{ product.title.lower().replace(' ', '-') }}">
             <figure class="image is-square">
                 <img
                     src="{{ url_for('static', filename=product.img_path)}}"

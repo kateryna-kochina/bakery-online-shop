@@ -5,25 +5,25 @@
 <section class="hero is-fullheight is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container">
-            {% include ('products/includes/level.html') %} 
+            {% include ('products/includes/categories_navigation.html') %} 
             
             {% if categories_data %}
-                {% for category_data in categories_data %}
-                <div class="columns is-multiline">
-                    {% for product in category_data['products'] %}
-                    <div class="column is-one-third">
-                        {% include ('products/includes/card.html') %}
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endfor %}
-            {% else %}
-            <h2 class="title">All Products</h2>
             <div class="columns is-multiline">
                 {% for category_data in categories_data %}
                     {% for product in category_data['products'] %}
                     <div class="column is-one-third">
-                        {% include ('products/includes/card.html') %}
+                        {% include ('products/includes/product_card.html') %}
+                    </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% else %}
+
+            <div class="columns is-multiline">
+                {% for category_data in categories_data %}
+                    {% for product in category_data['products'] %}
+                    <div class="column is-one-third">
+                        {% include ('products/includes/product_card.html') %}
                     </div>
                     {% endfor %}
                 {% endfor %}
