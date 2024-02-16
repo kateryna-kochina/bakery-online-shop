@@ -1,6 +1,8 @@
 <div class="card is-shadowless">
     <div class="card-image has-relative-position">
-        <a href="/products/{{ category_data['name'].lower() }}/{{ product.title.lower().replace(' ', '-') }}">
+        <a
+            href="/products/{{ category_data['name'].lower() }}/{{ product.title.lower().replace(' ', '-') }}"
+        >
             <figure class="image is-square">
                 <img
                     src="{{ url_for('static', filename=product.img_path)}}"
@@ -8,7 +10,18 @@
                 />
             </figure>
         </a>
-        {% include ('products/includes/add_button.html') %}
+        <div class="has-absolute-position has-top-right-position">
+            <form id="" method="POST" action="">
+                <button
+                    type="submit"
+                    class="add-button button is-primary is-rounded is-outlined"
+                >
+                    <span class="is-uppercase has-text-weight-bold"
+                        >ADD TO CART</span
+                    >
+                </button>
+            </form>
+        </div>
     </div>
     <div class="columns is-aligned-top mt-1">
         <div class="column is-one-third has-text-left">
@@ -17,7 +30,9 @@
             >
         </div>
         <div class="column is-two-thirds has-text-right">
-            <a class="card-content-item is-size-5 is-capitalized" href="#"
+            <a
+                class="card-content-item is-size-5 is-capitalized"
+                href="/products/{{ category_data['name'].lower() }}/{{ product.title.lower().replace(' ', '-') }}"
                 >{{ product['title'] }}</a
             >
         </div>

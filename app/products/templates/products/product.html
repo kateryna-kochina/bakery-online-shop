@@ -10,7 +10,7 @@
         </figure>
     </div>
 
-    <div class="column is-5 mx-4">
+    <div class="column is-5 px-6 mx-6 is-centered">
         <div class="product-title pb-6">
             <h2 class="title is-uppercase is-tertiary-color">
                 {{ product.title}}
@@ -23,15 +23,72 @@
             </p>
         </div>
 
-        <div class="select-form pt-6">
-            <span class="subtitle is-uppercase is-size-5 has-text-weight-bold">
-                Select Your Number of Treats
-            </span>
-            <form>
-                <div class="select-options columns">
-                    <div class="column is-one-third">1 slice</div>
-                    <div class="column is-one-third">half of cake</div>
-                    <div class="column is-one-third"></div>
+        <div class="pt-6 is-justify-content-center">
+            <div class="my-4">
+                <span
+                    class="subtitle is-uppercase is-size-6 is-tertiary-color has-text-weight-bold"
+                >
+                    Select your number of treats
+                </span>
+            </div>
+
+            <form method="POST" action="#">
+                <div class="columns">
+                    <div class="column is-centered">
+                        <div class="columns">
+                            {% for item in ['slice','half','whole'] %}
+                            <div
+                                class="choice-options column is-vcentered is-inline-block-mobile is-justify-content-center my-5"
+                            >
+                                <a
+                                    class="option-item is-centered is-justify-content-center has-text-centered"
+                                >
+                                    <div
+                                        class="is-centered is-justify-content-center is-block"
+                                    >
+                                        <ion-icon
+                                            class="radio-btn radio-btn-off-item"
+                                            name="radio-button-off-outline"
+                                        ></ion-icon>
+                                        <!-- <ion-icon
+                                            class="radio-btn-on-item"
+                                            name="radio-button-on-outline"
+                                        ></ion-icon> -->
+                                    </div>
+                                    <span class="option-title is-block is-uppercase"
+                                        >{{ item }}</span
+                                    >
+                                    <span class="option-price is-block">${{ 100 / 8}}</span>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="column is-fullwidth">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input
+                                    class="input has-text-centered"
+                                    type="number"
+                                    value="1"
+                                />
+                            </div>
+                            <div class="control">
+                                <button
+                                    type="submit"
+                                    class="add-button button is-primary is-outlined"
+                                >
+                                    <span
+                                        class="is-uppercase has-text-weight-bold"
+                                        >$100.00 | Add to cart</span
+                                    >
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

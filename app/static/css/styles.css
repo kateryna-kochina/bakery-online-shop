@@ -181,3 +181,52 @@ ion-icon:hover,
 ion-icon:focus-visible {
     color: var(--tertiary);
 }
+
+ion-icon.radio-btn-off-item {
+    color: var(--tertiary);
+}
+
+ion-icon.radio-btn-on-item {
+    color: var(--secondary);
+}
+
+ion-icon.radio-btn-on-item:focus,
+ion-icon.radio-btn-on-item:hover,
+ion-icon.radio-btn-on-item:focus-visible {
+    color: var(--tertiary);
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+button ion-icon {
+    color: var(--primary);
+}
+
+.choice-options a.option-item {
+    color: var(--tertiary);
+}
+
+.choice-options:hover .option-item,
+.choice-options:hover .option-item .radio-btn,
+.choice-options:hover .option-item .option-title,
+.choice-options:hover .option-item .option-price {
+    color: var(--secondary);
+}
+
+.choice-options:focus .option-item,
+.choice-options:focus .option-item .radio-btn,
+.choice-options:focus .option-item .option-title,
+.choice-options:focus .option-item .option-price {
+    color: var(--secondary);
+}
+
+.choice-options:focus-visible .option-item,
+.choice-options:focus-visible .option-item .radio-btn,
+.choice-options:focus-visible .option-item .option-title,
+.choice-options:focus-visible .option-item .option-price {
+    color: var(--secondary);
+}
