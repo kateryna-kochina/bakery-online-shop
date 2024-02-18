@@ -1,5 +1,7 @@
-0.125
-0.5
-1
-6
-12
+name,coefficient
+slice,0.125
+half,0.5
+whole,1.0
+one,1.0
+six,6.0
+dozen,12.0
