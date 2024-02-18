@@ -38,34 +38,37 @@
                         <div class="columns">
                             {% for choice in choices %}
                             <div
-                                class="choice-options column is-vcentered is-inline-block-mobile is-justify-content-center my-5"
+                                class="choice-item column is-vcentered is-inline-block-mobile is-justify-content-center my-5"
                             >
                                 <a
-                                    class="option-item is-centered is-justify-content-center has-text-centered"
+                                    class="choice-link has-text-centered"
+                                    onclick="toggleIcon(this)"
                                 >
                                     <div
                                         class="is-centered is-justify-content-center is-block"
                                     >
                                         <ion-icon
-                                            class="radio-btn radio-btn-off-item"
+                                            class="choice-radio-btn radio-btn-off-item"
                                             name="radio-button-off-outline"
                                         ></ion-icon>
                                         <ion-icon
-                                            class="radio-btn-on-item"
+                                            class="choice-radio-btn radio-btn-on-item"
                                             name="radio-button-on-outline"
+                                            style="display: none;"
                                         ></ion-icon>
                                     </div>
                                     <span
-                                        class="option-title is-block is-uppercase"
+                                        class="choice-name is-block is-uppercase"
                                         >{{ choice.name }}</span
                                     >
-                                    <span class="option-price is-block"
+                                    <span class="choice-price is-block"
                                         >${{ "%0.2f"|format((product.price *
                                         choice.coefficient)|float) }}</span
                                     >
                                 </a>
                             </div>
                             {% endfor %}
+
                         </div>
                     </div>
                 </div>

@@ -182,17 +182,17 @@ ion-icon:focus-visible {
     color: var(--tertiary);
 }
 
-ion-icon.radio-btn-off-item {
+ion-icon.choice-radio-btn-off-item {
     color: var(--tertiary);
 }
 
-ion-icon.radio-btn-on-item {
+ion-icon.choice-radio-btn-on-item {
     color: var(--secondary);
 }
 
-ion-icon.radio-btn-on-item:focus,
-ion-icon.radio-btn-on-item:hover,
-ion-icon.radio-btn-on-item:focus-visible {
+ion-icon.choice-radio-btn-on-item:focus,
+ion-icon.choice-radio-btn-on-item:hover,
+ion-icon.choice-radio-btn-on-item:focus-visible {
     color: var(--tertiary);
 }
 
@@ -206,27 +206,56 @@ button ion-icon {
     color: var(--primary);
 }
 
-.choice-options a.option-item {
+.choice-link,
+.choice-radio-btn {
     color: var(--tertiary);
 }
 
-.choice-options:hover .option-item,
-.choice-options:hover .option-item .radio-btn,
-.choice-options:hover .option-item .option-title,
-.choice-options:hover .option-item .option-price {
+.choice-link:hover,
+.choice-link:hover .choice-radio-btn,
+.choice-link:hover .choice-name,
+.choice-link:hover .choice-price {
     color: var(--secondary);
 }
 
-.choice-options:focus .option-item,
-.choice-options:focus .option-item .radio-btn,
-.choice-options:focus .option-item .option-title,
-.choice-options:focus .option-item .option-price {
+.choice-link:focus,
+.choice-link:focus .choice-radio-btn,
+.choice-link:focus .choice-name,
+.choice-link:focus .choice-price {
     color: var(--secondary);
 }
 
-.choice-options:focus-visible .option-item,
-.choice-options:focus-visible .option-item .radio-btn,
-.choice-options:focus-visible .option-item .option-title,
-.choice-options:focus-visible .option-item .option-price {
+.choice-link:focus-within,
+.choice-link:focus-within .choice-radio-btn,
+.choice-link:focus-within .choice-name,
+.choice-link:focus-within .choice-price {
     color: var(--secondary);
+}
+
+.choice-item.selected .choice-link,
+.choice-item.selected .choice-link .choice-radio-btn,
+.choice-item.selected .choice-link .choice-name,
+.choice-item.selected .choice-link .choice-price {
+    color: var(--secondary);
+}
+
+.choice-item.selected .choice-link:hover,
+.choice-item.selected .choice-link:hover .choice-radio-btn,
+.choice-item.selected .choice-link:hover .choice-name,
+.choice-item.selected .choice-link:hover .choice-price {
+    color: var(--tertiary);
+}
+
+.choice-item.selected .choice-link:focus,
+.choice-item.selected .choice-link:focus .choice-radio-btn,
+.choice-item.selected .choice-link:focus .choice-name,
+.choice-item.selected .choice-link:focus .choice-price {
+    color: var(--tertiary);
+}
+
+.choice-item.selected .choice-link:focus-within,
+.choice-item.selected .choice-link:focus-within .choice-radio-btn,
+.choice-item.selected .choice-link:focus-within .choice-name,
+.choice-item.selected .choice-link:focus-within .choice-price {
+    color: var(--tertiary);
 }
