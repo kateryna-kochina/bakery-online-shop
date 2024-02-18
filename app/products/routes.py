@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 
 from ..database import db
-from .models import Category, Product
+from .models import Category, Product, Choice
 
 
 products_bp = Blueprint('products', __name__, template_folder='templates')
@@ -106,12 +106,20 @@ def show_product_details(category, product_title):
     product = db.session.query(Product).join(Category).filter(
         Category.name == category, Product.title == product_title).first()
     
+    # category = Category.query.filter_by(Category.id == Product.category_id).first()
+    
+    # choices = category.choices
+
+    choices = db.session.query(Category).filter(Category.id == Product.category_id).first().choices
+
+
     if product:
         # Render the template with the product details
-        return render_template('products/product.html', 
-                               product=product, 
-                               categories=categories, 
-                               active_category=category)
+        return render_template('products/product.html',
+                               product=product,
+                               categories=categories,
+                               active_category=category,
+                               choices=choices)
     else:
         # If product not found, redirect to products page
         return redirect(url_for('products.show_products'))

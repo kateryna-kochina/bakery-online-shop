@@ -14,6 +14,9 @@ def create_app():
     try:
         app.config.from_object(Config)
 
+        # Set secret key
+        app.secret_key = app.config['FLASK_SECRET_KEY']
+
         # Set up database
         app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
         db.init_app(app)

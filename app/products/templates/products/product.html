@@ -36,7 +36,7 @@
                 <div class="columns">
                     <div class="column is-centered">
                         <div class="columns">
-                            {% for item in ['slice','half','whole'] %}
+                            {% for choice in choices %}
                             <div
                                 class="choice-options column is-vcentered is-inline-block-mobile is-justify-content-center my-5"
                             >
@@ -50,15 +50,19 @@
                                             class="radio-btn radio-btn-off-item"
                                             name="radio-button-off-outline"
                                         ></ion-icon>
-                                        <!-- <ion-icon
+                                        <ion-icon
                                             class="radio-btn-on-item"
                                             name="radio-button-on-outline"
-                                        ></ion-icon> -->
+                                        ></ion-icon>
                                     </div>
-                                    <span class="option-title is-block is-uppercase"
-                                        >{{ item }}</span
+                                    <span
+                                        class="option-title is-block is-uppercase"
+                                        >{{ choice.name }}</span
                                     >
-                                    <span class="option-price is-block">${{ 100 / 8}}</span>
+                                    <span class="option-price is-block"
+                                        >${{ "%0.2f"|format((product.price *
+                                        choice.coefficient)|float) }}</span
+                                    >
                                 </a>
                             </div>
                             {% endfor %}
