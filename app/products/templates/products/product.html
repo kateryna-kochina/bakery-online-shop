@@ -33,6 +33,7 @@
             </div>
 
             <form method="POST" action="#">
+                {{ form.hidden_tag() }}
                 <div class="columns">
                     <div class="column is-centered">
                         <div class="columns">
@@ -42,7 +43,9 @@
                             >
                                 <a
                                     class="choice-link has-text-centered"
+
                                     onclick="toggleIcon(this)"
+                                    data-choice="{{ choice.id }}"
                                 >
                                     <div
                                         class="is-centered is-justify-content-center is-block"
@@ -54,7 +57,7 @@
                                         <ion-icon
                                             class="choice-radio-btn radio-btn-on-item"
                                             name="radio-button-on-outline"
-                                            style="display: none;"
+                                            style="display: none"
                                         ></ion-icon>
                                     </div>
                                     <span
@@ -68,7 +71,6 @@
                                 </a>
                             </div>
                             {% endfor %}
-
                         </div>
                     </div>
                 </div>
@@ -77,22 +79,13 @@
                     <div class="column is-fullwidth">
                         <div class="field has-addons">
                             <div class="control is-expanded">
-                                <input
-                                    class="input has-text-centered"
-                                    type="number"
-                                    value="1"
-                                />
+                                {{ form.quantity( class="input
+                                has-text-centered", value="1" ) }}
                             </div>
                             <div class="control">
-                                <button
-                                    type="submit"
-                                    class="add-button button is-primary is-outlined"
-                                >
-                                    <span
-                                        class="is-uppercase has-text-weight-bold"
-                                        >$100.00 | Add to cart</span
-                                    >
-                                </button>
+                                {{ form.add_to_cart_btn( class="add-button
+                                button is-primary is-outlined is-uppercase
+                                has-text-weight-bold", value="Add to Cart" ) }}
                             </div>
                         </div>
                     </div>

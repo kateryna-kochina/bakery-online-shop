@@ -15,6 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Set choice id to hidden input value with selected_choice id
+function setSelectedChoice(choiceId) {
+  var selectedChoiceInput = document.getElementById('selected_choice');
+  if (selectedChoiceInput) {
+    selectedChoiceInput.value = choiceId;
+  } else {
+    console.error('Could not find selected_choice input element.');
+  }
+}
+
 
 // Enables users to select only one choice at a time from a list, 
 // updating the visual representation of radio buttons accordingly
@@ -55,7 +65,13 @@ function toggleIcon(element) {
       } else if (icon.classList.contains('radio-btn-on-item')) {
         icon.style.display = 'inline-block';
       }
-    } else {
+
+      // Get the choice ID
+      const choiceId = element.getAttribute('data-choice');
+      // Set the selected choice
+      setSelectedChoice(choiceId);
+    }
+    else {
       // If the choice is not selected, show the off radio button icon and hide the on radio button icon
       if (icon.classList.contains('radio-btn-off-item')) {
         icon.style.display = 'inline-block';
@@ -64,4 +80,5 @@ function toggleIcon(element) {
       }
     }
   });
+
 }

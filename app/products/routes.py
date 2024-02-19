@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, render_template, request, url_for
 
 from ..database import db
 from .models import Category, Product, Choice
+from .forms import ChoiceForm
 
 
 products_bp = Blueprint('products', __name__, template_folder='templates')
@@ -94,8 +95,10 @@ def capitalize_title(title):
     return capitalized_title
 
 
-@products_bp.route('/products/<category>/<product_title>')
+@products_bp.route('/products/<category>/<product_title>', methods=['GET', 'POST'])
 def show_product_details(category, product_title):
+    form = ChoiceForm()
+
     # Convert title to same format as it is in db
     product_title = capitalize_title(product_title)
 
@@ -105,13 +108,29 @@ def show_product_details(category, product_title):
     # Retrieve product details by category and product name
     product = db.session.query(Product).join(Category).filter(
         Category.name == category, Product.title == product_title).first()
-    
-    # category = Category.query.filter_by(Category.id == Product.category_id).first()
-    
-    # choices = category.choices
 
-    choices = db.session.query(Category).filter(Category.id == Product.category_id).first().choices
+    choices = db.session.query(Category).filter(
+        Category.id == product.category_id).first().choices
 
+    print(f'choices for {category} with {Product.category_id} are {choices}')
+
+    if form.validate_on_submit():
+        quantity = form.quantity.data
+        selected_choice = form.selected_choice.data
+
+        print(f'quantity is {quantity}')
+        print(f'selected_choice has id {selected_choice}')
+
+        if not selected_choice:  # If selected_choice is empty
+            # Query for a choice where category_id = category and coefficient = 1.0
+            chosen_choice = db.session.query(Choice).join(Category, Choice.categories).filter(
+                Category.id == product.category_id, Choice.coefficient == 1.0).first()
+
+            if chosen_choice:
+                selected_choice = chosen_choice.id  # Assign the id of choice that has 1.0 coefficient
+                print(f'Selected choice is now: {selected_choice}')
+
+        return redirect(url_for('products.show_products'))
 
     if product:
         # Render the template with the product details
@@ -119,7 +138,8 @@ def show_product_details(category, product_title):
                                product=product,
                                categories=categories,
                                active_category=category,
-                               choices=choices)
+                               choices=choices,
+                               form=form)
     else:
         # If product not found, redirect to products page
         return redirect(url_for('products.show_products'))
