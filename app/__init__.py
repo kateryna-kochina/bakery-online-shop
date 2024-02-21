@@ -5,7 +5,9 @@ from populate_database import populate_database
 
 from .database import db
 from .general.routes import general_bp
+from .login_manager import login_manager
 from .products.routes import products_bp
+from .user.routes import user_bp
 
 
 def create_app():
@@ -17,6 +19,9 @@ def create_app():
         # Set secret key
         app.secret_key = app.config['FLASK_SECRET_KEY']
 
+        # Set up a login manager to handle user authentication
+        login_manager.init_app(app)
+
         # Set up database
         app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
         db.init_app(app)
@@ -26,6 +31,7 @@ def create_app():
         # Register blueprints
         app.register_blueprint(general_bp)
         app.register_blueprint(products_bp)
+        app.register_blueprint(user_bp)
         print('Blueprints registered successfully.')
 
         return app
@@ -37,7 +43,7 @@ def create_app():
 
 
 def setup_database(app):
-    from .products.models import Category, Product
+    from .products.models import Category, Choice, Product
 
     with app.app_context():
         try:

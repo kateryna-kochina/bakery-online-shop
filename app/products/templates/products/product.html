@@ -1,4 +1,6 @@
-{% extends 'products/products_base.html' %} {% block content_products %}
+{% extends 'products/products_base.html' %} 
+
+{% block content_products %}
 
 <div class="columns">
     <div class="column is-6 is-flex is-justify-content-center mx-2">
@@ -43,7 +45,6 @@
                             >
                                 <a
                                     class="choice-link has-text-centered"
-
                                     onclick="toggleIcon(this)"
                                     data-choice="{{ choice.id }}"
                                 >

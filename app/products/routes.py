@@ -112,8 +112,6 @@ def show_product_details(category, product_title):
     choices = db.session.query(Category).filter(
         Category.id == product.category_id).first().choices
 
-    print(f'choices for {category} with {Product.category_id} are {choices}')
-
     if form.validate_on_submit():
         quantity = form.quantity.data
         selected_choice = form.selected_choice.data
@@ -143,3 +141,18 @@ def show_product_details(category, product_title):
     else:
         # If product not found, redirect to products page
         return redirect(url_for('products.show_products'))
+
+
+# @products_bp.route('/products/<category>/<product_title>/add', methods=['GET', 'POST'])
+# def add_product():
+#     pass
+
+
+# @products_bp.route('/products/<category>/<product_title>/delete', methods=['GET', 'POST'])
+# def delete_product():
+#     pass
+
+
+# @products_bp.route('/products/<category>/<product_title>/edit', methods=['GET', 'POST'])
+# def edit_product():
+#     pass

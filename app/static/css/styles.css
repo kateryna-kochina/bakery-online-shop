@@ -259,3 +259,36 @@ button ion-icon {
 .choice-item.selected .choice-link:focus-within .choice-price {
     color: var(--tertiary);
 }
+
+.form-item,
+.form-submit {
+    margin: 30px auto;
+}
+
+.input.form-input {
+    border-color: var(--grey);
+    color: var(--tertiary);
+}
+
+span.icon ion-icon {
+    color: var(--grey);
+}
+
+.input.form-input:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.input.form-input:focus {
+    border-color: var(--secondary);
+    color: var(--tertiary);
+}
+
+
+.signup-link {
+    color: var(--secondary);
+}
+
+.signup-link:hover {
+    color: var(--tertiary);
+}

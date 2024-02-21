@@ -1,4 +1,8 @@
-<nav class="navbar is-spaced is-fixed-top" role="navigation" aria-label="main navigation">
+<nav
+    class="navbar is-spaced is-fixed-top"
+    role="navigation"
+    aria-label="main navigation"
+>
     <div class="navbar-brand is-flex is-justify-content-center">
         <a class="navbar-item" href="{{url_for('general.home')}}">
             <img
@@ -22,12 +26,32 @@
     <div id="nav-menu" class="navbar-menu is-shadowless has-text-weight-bold">
         <div class="navbar-start is-flex is-justify-content-center"></div>
         <div class="navbar-end is-flex is-justify-content-center">
-            <a class="navbar-item is-uppercase is-size-5" href="{{ url_for('products.show_products') }}"> Products </a>
+            <a
+                class="navbar-item is-uppercase is-size-5"
+                href="{{ url_for('products.show_products') }}"
+            >
+                Products
+            </a>
 
-            <a class="navbar-item is-uppercase is-size-5" href="{{ url_for('general.about') }}">
+            <a
+                class="navbar-item is-uppercase is-size-5"
+                href="{{ url_for('general.about') }}"
+            >
                 About
             </a>
-            <a class="navbar-item is-uppercase is-size-5" href=""> Login </a>
+            <!-- {% if is_logged_in %} -->
+            <a
+                class="navbar-item is-uppercase is-size-5"
+                href="#"
+                >Logout</a
+            >
+            <!-- {% else %} -->
+            <a
+                class="navbar-item is-uppercase is-size-5"
+                href="{{ url_for('user.login') }}"
+                >Login</a
+            >
+            <!-- {% endif %} -->
 
             <a class="navbar-item" href="">
                 <ion-icon size="large" name="cart-outline"></ion-icon>

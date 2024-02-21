@@ -1,0 +1,26 @@
+{% extends 'general/base.html' %}
+
+{% block content %}
+
+<section class="hero is-fullheight is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-3-desktop"></div>
+                <div
+                    class="column is-half-desktop is-fullwidth-tablet is-fullwidth-mobile is-centered has-text-centered"
+                >
+                    <h2
+                        class="subtitle is-size-3 is-uppercase is-secondary-color"
+                    >
+                        {% block title %} {% endblock title%}
+                    </h2>
+
+                    {% block form %} {% endblock form %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
