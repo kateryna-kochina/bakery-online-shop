@@ -34,40 +34,40 @@
                 </span>
             </div>
 
-            <form method="POST" action="#">
+            <form method="POST">
                 {{ form.hidden_tag() }}
                 <div class="columns">
                     <div class="column is-centered">
                         <div class="columns">
-                            {% for choice in choices %}
+                            {% for option in options %}
                             <div
-                                class="choice-item column is-vcentered is-inline-block-mobile is-justify-content-center my-5"
+                                class="option-item column is-vcentered is-inline-block-mobile is-justify-content-center my-5"
                             >
                                 <a
-                                    class="choice-link has-text-centered"
+                                    class="option-link has-text-centered"
                                     onclick="toggleIcon(this)"
-                                    data-choice="{{ choice.id }}"
+                                    data-option="{{ option.id }}"
                                 >
                                     <div
                                         class="is-centered is-justify-content-center is-block"
                                     >
                                         <ion-icon
-                                            class="choice-radio-btn radio-btn-off-item"
+                                            class="option-radio-btn radio-btn-off-item"
                                             name="radio-button-off-outline"
                                         ></ion-icon>
                                         <ion-icon
-                                            class="choice-radio-btn radio-btn-on-item"
+                                            class="option-radio-btn radio-btn-on-item"
                                             name="radio-button-on-outline"
                                             style="display: none"
                                         ></ion-icon>
                                     </div>
                                     <span
-                                        class="choice-name is-block is-uppercase"
-                                        >{{ choice.name }}</span
+                                        class="option-name is-block is-uppercase"
+                                        >{{ option.name }}</span
                                     >
-                                    <span class="choice-price is-block"
+                                    <span class="option-price is-block"
                                         >${{ "%0.2f"|format((product.price *
-                                        choice.coefficient)|float) }}</span
+                                        option.coefficient)|float) }}</span
                                     >
                                 </a>
                             </div>

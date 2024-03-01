@@ -1,7 +1,7 @@
 import csv
 
 from app.database import db
-from app.products.models import Category, Choice, Product
+from app.products.models import Category, Option, Product
 
 
 def populate_database():
@@ -29,30 +29,30 @@ def populate_database():
                     )
                     db.session.add(product)
 
-            # Read choices and category_choice from CSV file
-            with open('data/choices.csv', newline='') as csvfile:
+            # Read options and category_option from CSV file
+            with open('data/options.csv', newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    choice = Choice(
+                    option = Option(
                         name=row['name'],
                         coefficient=float(row['coefficient'])
                     )
-                    db.session.add(choice)
+                    db.session.add(option)
 
-            # Read category_choice from CSV file
-            with open('data/category_choice.csv', newline='') as csvfile:
+            # Read category_option from CSV file
+            with open('data/category_option.csv', newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
                     category_id = int(row['category_id'])
-                    choice_id = int(row['choice_id'])
+                    option_id = int(row['option_id'])
 
-                    # Retrieve category and choice objects
+                    # Retrieve category and option objects
                     category = Category.query.get(category_id)
-                    choice = Choice.query.get(choice_id)
+                    option = Option.query.get(option_id)
 
-                    # Ensure both category and choice exist before associating them
-                    if category and choice:
-                        category.choices.append(choice)
+                    # Ensure both category and option exist before associating them
+                    if category and option:
+                        category.options.append(option)
 
             # Commit the changes
             db.session.commit()

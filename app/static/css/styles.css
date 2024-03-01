@@ -182,17 +182,17 @@ ion-icon:focus-visible {
     color: var(--tertiary);
 }
 
-ion-icon.choice-radio-btn-off-item {
+ion-icon.option-radio-btn-off-item {
     color: var(--tertiary);
 }
 
-ion-icon.choice-radio-btn-on-item {
+ion-icon.option-radio-btn-on-item {
     color: var(--secondary);
 }
 
-ion-icon.choice-radio-btn-on-item:focus,
-ion-icon.choice-radio-btn-on-item:hover,
-ion-icon.choice-radio-btn-on-item:focus-visible {
+ion-icon.option-radio-btn-on-item:focus,
+ion-icon.option-radio-btn-on-item:hover,
+ion-icon.option-radio-btn-on-item:focus-visible {
     color: var(--tertiary);
 }
 
@@ -206,57 +206,57 @@ button ion-icon {
     color: var(--primary);
 }
 
-.choice-link,
-.choice-radio-btn {
+.option-link,
+.option-radio-btn {
     color: var(--tertiary);
 }
 
-.choice-link:hover,
-.choice-link:hover .choice-radio-btn,
-.choice-link:hover .choice-name,
-.choice-link:hover .choice-price {
+.option-link:hover,
+.option-link:hover .option-radio-btn,
+.option-link:hover .option-name,
+.option-link:hover .option-price {
     color: var(--secondary);
 }
 
-.choice-link:focus,
-.choice-link:focus .choice-radio-btn,
-.choice-link:focus .choice-name,
-.choice-link:focus .choice-price {
+.option-link:focus,
+.option-link:focus .option-radio-btn,
+.option-link:focus .option-name,
+.option-link:focus .option-price {
     color: var(--secondary);
 }
 
-.choice-link:focus-within,
-.choice-link:focus-within .choice-radio-btn,
-.choice-link:focus-within .choice-name,
-.choice-link:focus-within .choice-price {
+.option-link:focus-within,
+.option-link:focus-within .option-radio-btn,
+.option-link:focus-within .option-name,
+.option-link:focus-within .option-price {
     color: var(--secondary);
 }
 
-.choice-item.selected .choice-link,
-.choice-item.selected .choice-link .choice-radio-btn,
-.choice-item.selected .choice-link .choice-name,
-.choice-item.selected .choice-link .choice-price {
+.option-item.selected .option-link,
+.option-item.selected .option-link .option-radio-btn,
+.option-item.selected .option-link .option-name,
+.option-item.selected .option-link .option-price {
     color: var(--secondary);
 }
 
-.choice-item.selected .choice-link:hover,
-.choice-item.selected .choice-link:hover .choice-radio-btn,
-.choice-item.selected .choice-link:hover .choice-name,
-.choice-item.selected .choice-link:hover .choice-price {
+.option-item.selected .option-link:hover,
+.option-item.selected .option-link:hover .option-radio-btn,
+.option-item.selected .option-link:hover .option-name,
+.option-item.selected .option-link:hover .option-price {
     color: var(--tertiary);
 }
 
-.choice-item.selected .choice-link:focus,
-.choice-item.selected .choice-link:focus .choice-radio-btn,
-.choice-item.selected .choice-link:focus .choice-name,
-.choice-item.selected .choice-link:focus .choice-price {
+.option-item.selected .option-link:focus,
+.option-item.selected .option-link:focus .option-radio-btn,
+.option-item.selected .option-link:focus .option-name,
+.option-item.selected .option-link:focus .option-price {
     color: var(--tertiary);
 }
 
-.choice-item.selected .choice-link:focus-within,
-.choice-item.selected .choice-link:focus-within .choice-radio-btn,
-.choice-item.selected .choice-link:focus-within .choice-name,
-.choice-item.selected .choice-link:focus-within .choice-price {
+.option-item.selected .option-link:focus-within,
+.option-item.selected .option-link:focus-within .option-radio-btn,
+.option-item.selected .option-link:focus-within .option-name,
+.option-item.selected .option-link:focus-within .option-price {
     color: var(--tertiary);
 }
 

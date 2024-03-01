@@ -3,6 +3,7 @@ from flask import Flask
 from config import Config
 from populate_database import populate_database
 
+from .cart.routes import cart_bp
 from .database import db
 from .general.routes import general_bp
 from .login_manager import login_manager
@@ -32,6 +33,7 @@ def create_app():
         app.register_blueprint(general_bp)
         app.register_blueprint(products_bp)
         app.register_blueprint(user_bp)
+        app.register_blueprint(cart_bp)
         print('Blueprints registered successfully.')
 
         return app
@@ -43,7 +45,7 @@ def create_app():
 
 
 def setup_database(app):
-    from .products.models import Category, Choice, Product
+    from .products.models import Category, Option, Product
 
     with app.app_context():
         try:

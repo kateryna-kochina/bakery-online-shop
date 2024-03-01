@@ -4,11 +4,11 @@ from sqlalchemy.orm import relationship
 from ..database import db
 
 
-category_choice_association_table = Table('category_choice', db.Model.metadata,
+category_option_association_table = Table('category_option', db.Model.metadata,
                                           Column('category_id', Integer,
                                                  ForeignKey('categories.id')),
-                                          Column('choice_id', Integer,
-                                                 ForeignKey('choices.id'))
+                                          Column('option_id', Integer,
+                                                 ForeignKey('options.id'))
                                           )
 
 
@@ -18,8 +18,8 @@ class Category(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(25), nullable=False)
 
-    choices = relationship(
-        'Choice', secondary=category_choice_association_table, back_populates='categories')
+    options = relationship(
+        'Option', secondary=category_option_association_table, back_populates='categories')
 
 
 class Product(db.Model):
@@ -34,12 +34,12 @@ class Product(db.Model):
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
 
 
-class Choice(db.Model):
-    __tablename__ = 'choices'
+class Option(db.Model):
+    __tablename__ = 'options'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(25), nullable=False)
     coefficient = Column(Float, nullable=False)
 
     categories = relationship(
-        'Category', secondary=category_choice_association_table, back_populates='choices')
+        'Category', secondary=category_option_association_table, back_populates='options')

@@ -15,30 +15,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Set choice id to hidden input value with selected_choice id
-function setSelectedChoice(choiceId) {
-  var selectedChoiceInput = document.getElementById('selected_choice');
-  if (selectedChoiceInput) {
-    selectedChoiceInput.value = choiceId;
+// Set option id to hidden input value with selected_option id
+function setSelectedoption(optionId) {
+  var selectedoptionInput = document.getElementById('selected_option');
+  if (selectedoptionInput) {
+    selectedoptionInput.value = optionId;
   } else {
-    console.error('Could not find selected_choice input element.');
+    console.error('Could not find selected_option input element.');
   }
 }
 
 
-// Enables users to select only one choice at a time from a list, 
+// Enables users to select only one option at a time from a list, 
 // updating the visual representation of radio buttons accordingly
 function toggleIcon(element) {
-  // Get all the choice items
-  const choiceItems = document.querySelectorAll('.choice-item');
+  // Get all the option items
+  const optionItems = document.querySelectorAll('.option-item');
 
-  // Deselect all other choices
-  choiceItems.forEach(item => {
+  // Deselect all other options
+  optionItems.forEach(item => {
     // Check if the item is not the parent of the clicked element
     if (item !== element.parentElement) {
-      // Remove the 'selected' class from other choices
+      // Remove the 'selected' class from other options
       item.classList.remove('selected');
-      // Reset the display of radio button icons for other choices
+      // Reset the display of radio button icons for other options
       const icons = item.querySelectorAll('ion-icon');
       icons.forEach(icon => {
         if (icon.classList.contains('radio-btn-off-item')) {
@@ -50,29 +50,29 @@ function toggleIcon(element) {
     }
   });
 
-  // Toggle the class 'selected' on the clicked choice
+  // Toggle the class 'selected' on the clicked option
   element.parentElement.classList.toggle('selected');
 
-  // Get the icons within the clicked choice
+  // Get the icons within the clicked option
   const icons = element.parentElement.querySelectorAll('ion-icon');
 
   // Toggle the display of the icons based on the presence of the 'selected' class
   icons.forEach(icon => {
     if (element.parentElement.classList.contains('selected')) {
-      // If the choice is selected, hide the off radio button icon and show the on radio button icon
+      // If the option is selected, hide the off radio button icon and show the on radio button icon
       if (icon.classList.contains('radio-btn-off-item')) {
         icon.style.display = 'none';
       } else if (icon.classList.contains('radio-btn-on-item')) {
         icon.style.display = 'inline-block';
       }
 
-      // Get the choice ID
-      const choiceId = element.getAttribute('data-choice');
-      // Set the selected choice
-      setSelectedChoice(choiceId);
+      // Get the option ID
+      const optionId = element.getAttribute('data-option');
+      // Set the selected option
+      setSelectedoption(optionId);
     }
     else {
-      // If the choice is not selected, show the off radio button icon and hide the on radio button icon
+      // If the option is not selected, show the off radio button icon and hide the on radio button icon
       if (icon.classList.contains('radio-btn-off-item')) {
         icon.style.display = 'inline-block';
       } else if (icon.classList.contains('radio-btn-on-item')) {

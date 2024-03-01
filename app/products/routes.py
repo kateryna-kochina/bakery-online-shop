@@ -1,8 +1,8 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 
 from ..database import db
-from .models import Category, Product, Choice
-from .forms import ChoiceForm
+from .forms import AddToCart
+from .models import Category, Option, Product
 
 
 products_bp = Blueprint('products', __name__, template_folder='templates')
@@ -17,6 +17,19 @@ def get_products_by_category(category=None):
         # Retrieve all products
         products = db.session.query(Product).all()
     return products
+
+
+def title_formatter(title):
+    # Split the title into words
+    words = title.split('-')
+
+    # Capitalize each word
+    capitalized_words = [word.capitalize() for word in words]
+
+    # Join the capitalized words back into a sentence
+    capitalized_title = ' '.join(capitalized_words)
+
+    return capitalized_title
 
 
 @products_bp.route('/products')
@@ -82,77 +95,81 @@ def show_products_by_category(active_category):
                            active_category=active_category)
 
 
-def capitalize_title(title):
-    # Split the title into words
-    words = title.split('-')
-
-    # Capitalize each word
-    capitalized_words = [word.capitalize() for word in words]
-
-    # Join the capitalized words back into a sentence
-    capitalized_title = ' '.join(capitalized_words)
-
-    return capitalized_title
-
-
-@products_bp.route('/products/<category>/<product_title>', methods=['GET', 'POST'])
-def show_product_details(category, product_title):
-    form = ChoiceForm()
-
-    # Convert title to same format as it is in db
-    product_title = capitalize_title(product_title)
-
-    # Get categories from db to display them for navigation
-    categories = db.session.query(Category).all()
-
-    # Retrieve product details by category and product name
-    product = db.session.query(Product).join(Category).filter(
+def get_product_details(category, product_title):
+    product_title = title_formatter(product_title)
+    return db.session.query(Product).join(Category).filter(
         Category.name == category, Product.title == product_title).first()
 
-    choices = db.session.query(Category).filter(
-        Category.id == product.category_id).first().choices
+def get_options(category_id):
+    category = db.session.query(Category).filter(
+        Category.id == category_id).first()
+    return category.options if category else []
 
-    if form.validate_on_submit():
-        quantity = form.quantity.data
-        selected_choice = form.selected_choice.data
+def add_to_cart(form, product):
+    quantity = form.quantity.data
+    selected_option = form.selected_option.data
 
-        print(f'quantity is {quantity}')
-        print(f'selected_choice has id {selected_choice}')
+    print(f'quantity is: {quantity}')
+    print(f'selected_option id is: {selected_option}')
 
-        if not selected_choice:  # If selected_choice is empty
-            # Query for a choice where category_id = category and coefficient = 1.0
-            chosen_choice = db.session.query(Choice).join(Category, Choice.categories).filter(
-                Category.id == product.category_id, Choice.coefficient == 1.0).first()
+    # If selected_option is empty
+    if not selected_option:
+        # Query for a option where category_id = category_id of currently displayed product and option coefficient = 1.0
+        default_option = db.session.query(Option).join(Category, Option.categories).filter(
+            Category.id == product.category_id, Option.coefficient == 1.0).first()
 
-            if chosen_choice:
-                selected_choice = chosen_choice.id  # Assign the id of choice that has 1.0 coefficient
-                print(f'Selected choice is now: {selected_choice}')
+        if default_option:
+            # Assign the id of default option with coefficient = 1.0
+            selected_option = default_option.id
+            print(
+                f'option is not seleted, default_option is: {selected_option}')
+            
+    print(f'item added to cart {product.id} - {product.category_id} - {selected_option} - {quantity}')
 
-        return redirect(url_for('products.show_products'))
+    return redirect(url_for('cart.view_cart'))
+
+
+@products_bp.route('/products/<active_category>/<product_title>', methods=['GET', 'POST'])
+def show_product_details(active_category, product_title):
+    form = AddToCart()
+
+    # Retrieve product details by category and product name
+    product = get_product_details(active_category, product_title)
 
     if product:
-        # Render the template with the product details
-        return render_template('products/product.html',
-                               product=product,
-                               categories=categories,
-                               active_category=category,
-                               choices=choices,
-                               form=form)
+
+        # Get categories from db to display them for navigation
+        categories = db.session.query(Category).all()
+
+        # Retrieve available options by category
+        options = get_options(product.category_id)
+
+        if form.validate_on_submit():
+            return add_to_cart(form, product)
+        else:
+            return render_template('products/product.html',
+                                   product=product,
+                                   categories=categories,
+                                   active_category=active_category,
+                                   options=options,
+                                   form=form)
+
     else:
         # If product not found, redirect to products page
+        # TODO: notify user the selected product cannot be found
         return redirect(url_for('products.show_products'))
 
 
-# @products_bp.route('/products/<category>/<product_title>/add', methods=['GET', 'POST'])
+# @products_bp.route('/products/<active_category>/<product_title>/add', methods=['GET', 'POST'])
 # def add_product():
 #     pass
 
 
-# @products_bp.route('/products/<category>/<product_title>/delete', methods=['GET', 'POST'])
+# @products_bp.route('/products/<active_category>/<product_title>/delete', methods=['GET', 'POST'])
 # def delete_product():
 #     pass
 
 
-# @products_bp.route('/products/<category>/<product_title>/edit', methods=['GET', 'POST'])
+# @products_bp.route('/products/<active_category>/<product_title>/edit', methods=['GET', 'POST'])
 # def edit_product():
 #     pass
