@@ -45,6 +45,9 @@
                 href="{{ url_for('user.logout') }}"
                 >Logout</a
             >
+            <a class="navbar-item" href="{{ url_for('cart.view_cart')}}">
+                <ion-icon size="large" name="cart-outline"></ion-icon>
+            </a>
             {% else %}
             <a
                 class="navbar-item is-uppercase is-size-5"
@@ -53,9 +56,6 @@
             >
             {% endif %}
 
-            <a class="navbar-item" href="">
-                <ion-icon size="large" name="cart-outline"></ion-icon>
-            </a>
         </div>
     </div>
 </nav>

@@ -5,14 +5,16 @@ from ..database import db
 
 
 class Cart(db.Model):
+    __tablename__ = 'carts'
+
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     items = relationship('CartItem', backref='cart',
                          cascade='all, delete-orphan', lazy=True)
 
-    def add_to_cart(self, product, selected_choice, quantity):
+    def add_to_cart(self, product, option, quantity):
         # Logic to add the specified product to the cart
-        item = CartItem(product_id=product.id, choice_id=selected_choice.id, quantity=quantity)
+        item = CartItem(product_id=product.id, option_id=option, quantity=quantity)
         self.items.append(item)
         db.session.commit()
 
@@ -28,8 +30,10 @@ class Cart(db.Model):
 
 
 class CartItem(db.Model):
+    __tablename__ = 'cart_items'
+
     id = Column(Integer, primary_key=True, autoincrement=True)
-    cart_id = Column(Integer, ForeignKey('cart.id'), nullable=False)
-    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
-    choice_id = Column(Integer, ForeignKey('choice.id'), nullable=False)
+    cart_id = Column(Integer, ForeignKey('carts.id'), nullable=False)
+    product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
+    option_id = Column(Integer, ForeignKey('options.id'), nullable=False)
     quantity = Column(Integer, nullable=False)

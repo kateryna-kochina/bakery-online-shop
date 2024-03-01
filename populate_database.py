@@ -1,5 +1,6 @@
 import csv
 
+from app.cart.models import Cart, CartItem
 from app.database import db
 from app.products.models import Category, Option, Product
 
@@ -7,6 +8,9 @@ from app.products.models import Category, Option, Product
 def populate_database():
     try:
         with db.session.begin_nested():
+
+            # Create all tables
+            db.create_all()
 
             # Read categories from CSV file
             with open('data/categories.csv', newline='') as csvfile:

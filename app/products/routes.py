@@ -1,11 +1,56 @@
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import current_user
 
+from ..cart.models import Cart
 from ..database import db
 from .forms import AddToCart
 from .models import Category, Option, Product
 
 
 products_bp = Blueprint('products', __name__, template_folder='templates')
+
+
+def add_to_cart(form, product):
+    quantity = form.quantity.data
+    selected_option = form.selected_option.data
+
+    print(f'Quantity is: {quantity}')
+    print(f'Selected_option id is: {selected_option}')
+
+    # If selected_option is empty
+    if not selected_option:
+        # Query for a option where category_id = category_id of currently displayed product and option coefficient = 1.0
+        default_option = db.session.query(Option).join(Category, Option.categories).filter(
+            Category.id == product.category_id, Option.coefficient == 1.0).first()
+
+        if default_option:
+            # Assign the id of default option with coefficient = 1.0
+            selected_option = default_option.id
+            print(
+                f'Option is not seleted, default_option id is: {selected_option}')
+
+    # Check if the current user has a cart
+    cart = Cart.query.filter_by(user_id=current_user.id).first()
+
+    # If the user doesn't have a cart, create one
+    if not cart:
+        cart = Cart(user_id=current_user.id)
+        db.session.add(cart)
+        db.session.commit()
+
+    # Add the selected product to the cart db table
+    cart.add_to_cart(product, int(selected_option), quantity)
+
+    print(
+        f'{product.title} [id: {product.id}] added to cart with option [id: {selected_option}] in amount of {quantity}. ')
+
+    return redirect(url_for('cart.view_cart'))
+
+
+def get_options(category_id):
+    category = db.session.query(Category).filter(
+        Category.id == category_id).first()
+    return category.options if category else []
 
 
 def get_products_by_category(category=None):
@@ -17,6 +62,12 @@ def get_products_by_category(category=None):
         # Retrieve all products
         products = db.session.query(Product).all()
     return products
+
+
+def get_product_details(category, product_title):
+    product_title = title_formatter(product_title)
+    return db.session.query(Product).join(Category).filter(
+        Category.name == category, Product.title == product_title).first()
 
 
 def title_formatter(title):
@@ -95,40 +146,6 @@ def show_products_by_category(active_category):
                            active_category=active_category)
 
 
-def get_product_details(category, product_title):
-    product_title = title_formatter(product_title)
-    return db.session.query(Product).join(Category).filter(
-        Category.name == category, Product.title == product_title).first()
-
-def get_options(category_id):
-    category = db.session.query(Category).filter(
-        Category.id == category_id).first()
-    return category.options if category else []
-
-def add_to_cart(form, product):
-    quantity = form.quantity.data
-    selected_option = form.selected_option.data
-
-    print(f'quantity is: {quantity}')
-    print(f'selected_option id is: {selected_option}')
-
-    # If selected_option is empty
-    if not selected_option:
-        # Query for a option where category_id = category_id of currently displayed product and option coefficient = 1.0
-        default_option = db.session.query(Option).join(Category, Option.categories).filter(
-            Category.id == product.category_id, Option.coefficient == 1.0).first()
-
-        if default_option:
-            # Assign the id of default option with coefficient = 1.0
-            selected_option = default_option.id
-            print(
-                f'option is not seleted, default_option is: {selected_option}')
-            
-    print(f'item added to cart {product.id} - {product.category_id} - {selected_option} - {quantity}')
-
-    return redirect(url_for('cart.view_cart'))
-
-
 @products_bp.route('/products/<active_category>/<product_title>', methods=['GET', 'POST'])
 def show_product_details(active_category, product_title):
     form = AddToCart()
@@ -145,7 +162,11 @@ def show_product_details(active_category, product_title):
         options = get_options(product.category_id)
 
         if form.validate_on_submit():
-            return add_to_cart(form, product)
+            if current_user.is_authenticated:  # Check if user is logged in
+                return add_to_cart(form, product)
+            else:
+                flash('Please log in to add items to your cart.', 'error')
+                return redirect(url_for('user.login'))  # Redirect to login page if not logged in
         else:
             return render_template('products/product.html',
                                    product=product,
@@ -160,16 +181,16 @@ def show_product_details(active_category, product_title):
         return redirect(url_for('products.show_products'))
 
 
-# @products_bp.route('/products/<active_category>/<product_title>/add', methods=['GET', 'POST'])
+# @products_bp.route('/products/add', methods=['GET', 'POST'])
 # def add_product():
 #     pass
 
 
-# @products_bp.route('/products/<active_category>/<product_title>/delete', methods=['GET', 'POST'])
+# @products_bp.route('/products/delete', methods=['GET', 'POST'])
 # def delete_product():
 #     pass
 
 
-# @products_bp.route('/products/<active_category>/<product_title>/edit', methods=['GET', 'POST'])
+# @products_bp.route('/products/edit', methods=['GET', 'POST'])
 # def edit_product():
 #     pass
