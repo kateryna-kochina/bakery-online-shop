@@ -1,6 +1,4 @@
-{% extends 'general/base.html' %} 
-
-{% block content %}
+{% extends 'general/base.html' %} {% block content %}
 
 <section class="hero is-fullheight is-fullheight-with-navbar">
     <div class="hero-body">
@@ -30,9 +28,12 @@
                         treats, ensuring a joyous and festive experience for you
                     </p>
 
-                    <a class="button is-primary is-rounded is-outlined">
+                    <button
+                        class="button is-primary is-rounded is-outlined"
+                        href="{{ url_for('products.show_products') }}"
+                    >
                         <strong>MAKE ORDER</strong>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

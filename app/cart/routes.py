@@ -1,9 +1,9 @@
-from flask import (Blueprint, jsonify, redirect, render_template, request,
-                   url_for)
+from flask import (Blueprint, jsonify, redirect, render_template, request, url_for)
 from flask_login import current_user, login_required
 
 from ..database import db
 from ..products.models import Option, Product
+from .forms import UpdateQuantity
 from .models import Cart
 
 cart_bp = Blueprint('cart', __name__, template_folder='templates')
@@ -12,6 +12,7 @@ cart_bp = Blueprint('cart', __name__, template_folder='templates')
 @cart_bp.route('/cart')
 @login_required
 def view_cart():
+    form = UpdateQuantity()
 
     # Retrieve the current user's cart
     user_cart = Cart.query.filter_by(user_id=current_user.id).first()
@@ -33,9 +34,19 @@ def view_cart():
                 'price': price
             })
 
+            print(cart_items)
+
+            if form.validate_on_submit():
+                integer_value = form.integer_field.data
+                if form.add_button.data:
+                    integer_value += 1
+                elif form.subtract_button.data:
+                    integer_value -= 1
+                form.integer_field.data = integer_value
+
         # Return the list of cart items as JSON
-        return render_template('cart/cart.html', cart_items=cart_items)
-    
+        return render_template('cart/cart.html', form=form, cart_items=cart_items)
+
     else:
         # If the user does not have a cart yet, return an empty list
         return jsonify([])

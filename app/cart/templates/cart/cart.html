@@ -1,6 +1,6 @@
 {% extends 'general/base.html' %} {% block content %}
 
-<section class="hero">
+<section class="hero is-fullheight is-fullheight-with-navbar">
     <div class="hero-body">
         <div class="container">
             <div class="columns">
@@ -13,10 +13,10 @@
                         class="columns is-flex is-justify-content-center has-text-centered"
                     >
                         <div class="column is-1">
-                            <figure>
+                            <figure class="image is-fullwidth">
                                 <img
-                                    scr="{{ url_for('static', filename=item.product_img) }}"
-                                    alt="{{ item.product_title | replace(' ','-') | lower }}-img "
+                                    src="{{ url_for('static', filename=item.product_img) }}"
+                                    alt="{{ item.product_title | replace(' ','-') | lower }}-img"
                                 />
                             </figure>
                         </div>
@@ -34,14 +34,14 @@
                                 * item.quantity) }}
                             </p>
                         </div>
-                        <div class="column is-1">
+                        <div class="column is-2">
+
                             <ion-icon name="remove-outline"></ion-icon>
-                        </div>
-                        <div class="column is-1">
-                            <p>{{ item.quantity }}</p>
-                        </div>
-                        <div class="column is-1">
+
+                            <span>{{ item.quantity }}</span>
+
                             <ion-icon name="add-outline"></ion-icon>
+
                         </div>
                         <div class="column is-1">
                             <ion-icon name="close-outline"></ion-icon>

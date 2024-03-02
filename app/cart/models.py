@@ -12,10 +12,11 @@ class Cart(db.Model):
     items = relationship('CartItem', backref='cart',
                          cascade='all, delete-orphan', lazy=True)
 
-    def add_to_cart(self, product, option, quantity):
+    def add_to_cart(self, product_id, option_id, quantity):
         # Logic to add the specified product to the cart
-        item = CartItem(product_id=product.id, option_id=option, quantity=quantity)
-        self.items.append(item)
+        item = CartItem(cart_id=self.id, product_id=product_id,
+                        option_id=option_id, quantity=quantity)
+        db.session.add(item)
         db.session.commit()
 
     def remove_from_cart(self, item_id):

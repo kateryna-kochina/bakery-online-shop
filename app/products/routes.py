@@ -12,22 +12,22 @@ products_bp = Blueprint('products', __name__, template_folder='templates')
 
 def add_to_cart(form, product):
     quantity = form.quantity.data
-    selected_option = form.selected_option.data
+    selected_option_id = form.selected_option.data
 
     print(f'Quantity is: {quantity}')
-    print(f'Selected_option id is: {selected_option}')
+    print(f'Selected_option id is: {selected_option_id}')
 
     # If selected_option is empty
-    if not selected_option:
+    if not selected_option_id:
         # Query for a option where category_id = category_id of currently displayed product and option coefficient = 1.0
         default_option = db.session.query(Option).join(Category, Option.categories).filter(
             Category.id == product.category_id, Option.coefficient == 1.0).first()
 
         if default_option:
             # Assign the id of default option with coefficient = 1.0
-            selected_option = default_option.id
+            selected_option_id = default_option.id
             print(
-                f'Option is not seleted, default_option id is: {selected_option}')
+                f'Option is not seleted, default_option id is: {selected_option_id}')
 
     # Check if the current user has a cart
     cart = Cart.query.filter_by(user_id=current_user.id).first()
@@ -39,10 +39,13 @@ def add_to_cart(form, product):
         db.session.commit()
 
     # Add the selected product to the cart db table
-    cart.add_to_cart(product, int(selected_option), quantity)
+    cart.add_to_cart(
+        product_id=product.id,
+        option_id=int(selected_option_id),
+        quantity=quantity)
 
     print(
-        f'{product.title} [id: {product.id}] added to cart with option [id: {selected_option}] in amount of {quantity}. ')
+        f'{product.title} [id: {product.id}] added to cart with option [id: {selected_option_id}] in amount of {quantity}. ')
 
     return redirect(url_for('cart.view_cart'))
 
@@ -108,13 +111,16 @@ def show_products():
         # Capitalize the active category for consistency
         active_category = active_category.capitalize()
         # Prepare data for the active category
-        categories_data = [{'name': active_category,
-                            'products': products_by_category.get(active_category, [])}]
+        categories_data = [{
+            'name': active_category,
+            'products': products_by_category.get(active_category, [])
+        }]
     else:
         # Prepare data for all categories
-        categories_data = [
-            {'name': category.name,
-             'products': products_by_category[category.name]} for category in categories]
+        categories_data = [{
+            'name': category.name,
+            'products': products_by_category[category.name]
+        } for category in categories]
 
     # Render the template with the necessary data
     return render_template('products/products.html',
@@ -166,7 +172,8 @@ def show_product_details(active_category, product_title):
                 return add_to_cart(form, product)
             else:
                 flash('Please log in to add items to your cart.', 'error')
-                return redirect(url_for('user.login'))  # Redirect to login page if not logged in
+                # Redirect to login page if not logged in
+                return redirect(url_for('user.login'))
         else:
             return render_template('products/product.html',
                                    product=product,

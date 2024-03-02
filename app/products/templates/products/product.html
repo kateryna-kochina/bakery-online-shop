@@ -7,7 +7,7 @@
         <figure class="image is-fullwidth">
             <img
                 src="{{ url_for('static', filename=product.img_path)}}"
-                alt="product-image"
+                alt="{{ product.title | replace(' ','-') | lower }}-image"
             />
         </figure>
     </div>
