@@ -1,9 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SubmitField, HiddenField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms import HiddenField, IntegerField, SubmitField
+from wtforms.validators import DataRequired, InputRequired, NumberRange
 
 
 class UpdateQuantity(FlaskForm):
-    quantity = IntegerField('Quantity', validators=[DataRequired(), NumberRange(min=1)])
-    add_button = SubmitField('Add', id='selected_option')
-    subtract_button = SubmitField('Subtract')
+    cart_item_id = HiddenField(
+        'Cart Item ID', id='cart_item', name='cart_item', validators=[DataRequired()])
+    quantity = IntegerField(
+        'Quantity', validators=[DataRequired(), NumberRange(min=1), InputRequired()])
+    update_btn = SubmitField('Update Quantity')
+    remove_btn = SubmitField('Remove Item From Cart')

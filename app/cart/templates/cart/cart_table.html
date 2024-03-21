@@ -1,0 +1,54 @@
+<table class="table is-fullwidth has-text-centered">
+    <thead>
+        <tr>
+            <th class="has-text-centered">product_img</th>
+            <th class="has-text-centered">product_title</th>
+            <th class="has-text-centered">option</th>
+            <th class="has-text-centered">price</th>
+            <th class="has-text-centered">quantity</th>
+            <th class="has-text-centered">sum</th>
+            <th class="has-text-centered">delete</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>sum</td>
+            <td></td>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for index in range(cart_items|length) %}
+        <tr>
+            {% set cart_item = cart_items[index] %}
+            {% set form = forms[index] %}
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <td class="is-flex is-justify-content-center">
+                    <figure class="image is-128x128 is-centered">
+                        <img
+                            src="{{ url_for('static', filename=cart_item.product_img) }}"
+                            alt="{{ cart_item.product_title | replace(' ','-') | lower }}-img"
+                        />
+                    </figure>
+                </td>
+                <td>{{ cart_item.product_title }}</td>
+                <td>{{ cart_item.option_name }}</td>
+                <td>${{ cart_item.price }}</td>
+                <td>
+                    {{ form.quantity(value=cart_item.quantity) }}
+                    {{ form.update_btn() }}
+
+                </td>
+                <td>${{ cart_item.sum }}</td>
+                <td>{{ form.remove_btn() }}</td>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

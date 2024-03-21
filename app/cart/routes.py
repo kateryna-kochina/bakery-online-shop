@@ -1,79 +1,72 @@
-from flask import (Blueprint, jsonify, redirect, render_template, request, url_for)
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
 from ..database import db
 from ..products.models import Option, Product
 from .forms import UpdateQuantity
-from .models import Cart
+from .models import Cart, CartItem
+
 
 cart_bp = Blueprint('cart', __name__, template_folder='templates')
 
 
-@cart_bp.route('/cart')
+@cart_bp.route('/cart', methods=['GET', 'POST'])
 @login_required
 def view_cart():
-    form = UpdateQuantity()
-
     # Retrieve the current user's cart
     user_cart = Cart.query.filter_by(user_id=current_user.id).first()
 
     if user_cart:
-        # Query cart items with additional information
         cart_items = []
+        forms = []
+
         for item in user_cart.items:
+            print(item.id)
+
+            form = UpdateQuantity(prefix=str(item.id))
+            form.cart_item_id.data = item.id
+            forms.append(form)
+
             product = Product.query.get(item.product_id)
             option = Option.query.get(item.option_id)
-            price = product.price * option.coefficient * item.quantity
-
             cart_items.append({
                 'product_title': product.title,
                 'product_img': product.img_path,
                 'option_name': option.name,
                 'coefficient': option.coefficient,
                 'quantity': item.quantity,
-                'price': price
+                'price': '{:.2f}'.format(product.price * option.coefficient),
+                'sum': '{:.2f}'.format(product.price * option.coefficient * item.quantity),
+                'cart_item_id': item.id
             })
 
-            print(cart_items)
+        if request.method == 'POST':
+            for form in forms:
+                if form.validate_on_submit():
+                    item_id = form.cart_item_id.data
+                    new_quantity = form.quantity.data
+                    
+                    # # Update the quantity of the cart item
+                    user_cart.update_quantity(item_id, new_quantity)
 
-            if form.validate_on_submit():
-                integer_value = form.integer_field.data
-                if form.add_button.data:
-                    integer_value += 1
-                elif form.subtract_button.data:
-                    integer_value -= 1
-                form.integer_field.data = integer_value
+                    flash('Quantity updated successfully!', 'success')
+                    
+                    # if 'update_btn' in request.form:
+                    #     new_quantity = form.quantity.data
+                    #     user_cart.update_quantity(item_id, new_quantity)
 
-        # Return the list of cart items as JSON
-        return render_template('cart/cart.html', form=form, cart_items=cart_items)
+                    #     flash('Quantity updated successfully!', 'success')
 
-    else:
-        # If the user does not have a cart yet, return an empty list
-        return jsonify([])
+                    # elif 'remove_btn' in request.form:
+                    #     user_cart.remove_from_cart(item_id)
 
-# @cart_bp.route('/add_to_cart')
-# def add_to_cart():
-#     pass
+                    #     flash('Item deleted successfully!', 'success')
 
-# @cart_bp.route('/quick_add')
-# def quick_add():
-#     pass
+                    return redirect(url_for('cart.view_cart'))
 
-# @cart_bp.route('/remove_from_cart')
-# def remove_from_cart():
-#     pass
+        return render_template('cart/cart.html',
+                               forms=forms,
+                               cart_items=cart_items)
 
-# @cart_bp.route('/view_cart')
-# def view_cart():
-#     pass
-
-
-# @app.route('/quick-add/<id>')
-# def quick_add(id):
-#     if 'cart' not in session:
-#         session['cart'] = []
-
-#     session['cart'].append({'id': id, 'quantity': 1})
-#     session.modified = True
-
-#     return redirect(url_for('index'))
+    # If user's cart is empty, return an empty cart
+    return render_template('cart/empty_cart.html')

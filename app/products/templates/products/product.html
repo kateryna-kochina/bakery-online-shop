@@ -36,6 +36,7 @@
 
             <form method="POST">
                 {{ form.hidden_tag() }}
+                {{ form.csrf_token }}
                 <div class="columns">
                     <div class="column is-centered">
                         <div class="columns">

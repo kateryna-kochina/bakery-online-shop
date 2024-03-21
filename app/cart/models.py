@@ -13,21 +13,21 @@ class Cart(db.Model):
                          cascade='all, delete-orphan', lazy=True)
 
     def add_to_cart(self, product_id, option_id, quantity):
-        # Logic to add the specified product to the cart
         item = CartItem(cart_id=self.id, product_id=product_id,
                         option_id=option_id, quantity=quantity)
         db.session.add(item)
         db.session.commit()
 
     def remove_from_cart(self, item_id):
-        # Logic to remove a product from the cart
         item = CartItem.query.get_or_404(item_id)
         db.session.delete(item)
         db.session.commit()
 
-    def update_quantity(self, quantity):
-        # Logic to update the quantity of a product in the cart
-        pass
+    def update_quantity(self, item_id, new_quantity):
+        item = CartItem.query.filter_by(cart_id=self.id, id=item_id).first()
+        if item:
+            item.quantity = new_quantity
+            db.session.commit()
 
 
 class CartItem(db.Model):

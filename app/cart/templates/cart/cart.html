@@ -6,49 +6,9 @@
             <div class="columns">
                 <div class="column is-1-desktop"></div>
                 <div
-                    class="column is-10-desktop is-fullwidth-tablet is-fullwidth-mobile is-centered"
+                    class="column is-10-desktop is-fullwidth-tablet is-fullwidth-mobile is-centered is-relative"
                 >
-                    {% for item in cart_items %}
-                    <div
-                        class="columns is-flex is-justify-content-center has-text-centered"
-                    >
-                        <div class="column is-1">
-                            <figure class="image is-fullwidth">
-                                <img
-                                    src="{{ url_for('static', filename=item.product_img) }}"
-                                    alt="{{ item.product_title | replace(' ','-') | lower }}-img"
-                                />
-                            </figure>
-                        </div>
-
-                        <div class="column is-4">
-                            <p>{{ item.product_title }}</p>
-                        </div>
-
-                        <div class="column is-1">
-                            <p>{{ item.option_name }}</p>
-                        </div>
-                        <div class="column is-1">
-                            <p>
-                                {{ '%.2f' | format(item.price * item.coefficient
-                                * item.quantity) }}
-                            </p>
-                        </div>
-                        <div class="column is-2">
-
-                            <ion-icon name="remove-outline"></ion-icon>
-
-                            <span>{{ item.quantity }}</span>
-
-                            <ion-icon name="add-outline"></ion-icon>
-
-                        </div>
-                        <div class="column is-1">
-                            <ion-icon name="close-outline"></ion-icon>
-                        </div>
-                        <br />
-                    </div>
-                    {% endfor %}
+                    {% include 'cart/cart_table.html' %}
                 </div>
             </div>
         </div>
