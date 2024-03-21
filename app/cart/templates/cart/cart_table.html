@@ -26,6 +26,7 @@
         <tr>
             {% set cart_item = cart_items[index] %}
             {% set form = forms[index] %}
+            {% set remove_item_form = remove_item_forms[index] %}
             <form method="POST">
                 {{ form.hidden_tag() }}
 
@@ -46,7 +47,11 @@
 
                 </td>
                 <td>${{ cart_item.sum }}</td>
-                <td>{{ form.remove_btn() }}</td>
+            </form>
+            
+            <form method="POST">
+                {{ remove_item_form.hidden_tag() }}
+                <td>{{ remove_item_form.remove_btn() }}</td>
             </form>
         </tr>
         {% endfor %}
