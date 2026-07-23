@@ -19,9 +19,13 @@ class Cart(db.Model):
         db.session.commit()
 
     def remove_from_cart(self, item_id):
-        item = CartItem.query.get_or_404(item_id)
+        item = CartItem.query.filter_by(cart_id=self.id, id=item_id).first()
+        if item is None:
+            return False
+
         db.session.delete(item)
         db.session.commit()
+        return True
 
     def update_quantity(self, item_id, new_quantity):
         item = CartItem.query.filter_by(cart_id=self.id, id=item_id).first()

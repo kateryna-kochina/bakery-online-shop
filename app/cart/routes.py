@@ -63,9 +63,12 @@ def view_cart():
                 for remove_item_form in remove_item_forms:
                     if remove_item_form.validate_on_submit():
                         item_id = remove_item_form.cart_item_id.data
-                        user_cart.remove_from_cart(item_id)
+                        item_removed = user_cart.remove_from_cart(item_id)
 
-                        flash('Item deleted successfully!', 'success')
+                        if item_removed:
+                            flash('Item deleted successfully!', 'success')
+                        else:
+                            flash('Item could not be found in your cart.', 'error')
 
             return redirect(url_for('cart.view_cart'))
 
