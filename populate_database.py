@@ -63,9 +63,9 @@ def populate_database():
             db.session.commit()
             print('Database populated successfully.')
 
-    except Exception as e:
+    except Exception:
         db.session.rollback()
-        print('Error populating database:', e)
+        raise
 
 
 if __name__ == '__main__':

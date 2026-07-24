@@ -19,6 +19,30 @@ body,
     color: var(--tertiary);
 }
 
+.site-notification {
+    width: calc(100% - 3rem);
+    max-width: 960px;
+    margin: 5rem auto 1.5rem;
+    padding: 1.25rem 3.5rem 1.25rem 1.5rem;
+    border: 0;
+    border-left: 5px solid var(--secondary);
+    border-radius: 0;
+    background-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(3, 70, 65, 0.12);
+    color: var(--tertiary);
+}
+
+.site-notification .delete {
+    top: 50%;
+    right: 1rem;
+    background-color: var(--secondary);
+    transform: translateY(-50%);
+}
+
+.site-notification .delete:hover {
+    background-color: var(--tertiary);
+}
+
 .has-relative-position {
     position: relative;
 }
@@ -38,6 +62,14 @@ body,
     color: var(--primary);
 }
 
+.button:hover,
+.button:focus,
+.button:focus-visible {
+    background-color: transparent;
+    border-color: var(--tertiary);
+    color: var(--tertiary);
+}
+
 .button.is-primary {
     background-color: var(--tertiary);
     border-color: var(--tertiary);
@@ -55,9 +87,9 @@ body,
 .button.is-primary.is-outlined:focus,
 .button.is-primary.is-outlined:hover,
 .button.is-primary.is-outlined:focus-visible {
-    background-color: var(--secondary);
-    border-color: var(--secondary);
-    color: var(--primary);
+    background-color: transparent;
+    border-color: var(--tertiary);
+    color: var(--tertiary);
 }
 
 .button.is-warning {
@@ -77,21 +109,21 @@ body,
 .button.is-warning.is-outlined:focus,
 .button.is-warning.is-outlined:hover,
 .button.is-warning.is-outlined:focus-visible {
-    background-color: var(--tertiary);
-    border-color: var(--tertiary);
-    color: var(--primary);
+    background-color: transparent;
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 .button.is-info {
-    background-color: transparent;
+    background-color: var(--secondary);
     border-color: var(--secondary);
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .button.is-info.is-outlined {
-    background-color: transparent;
+    background-color: var(--secondary);
     border-color: var(--secondary);
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .button.is-info.is-outlined.is-focused,
@@ -100,8 +132,8 @@ body,
 .button.is-info.is-outlined:hover,
 .button.is-info.is-outlined:focus-visible {
     background-color: transparent;
-    border-color: var(--tertiary);
-    color: var(--tertiary);
+    border-color: var(--secondary);
+    color: var(--secondary);
 }
 
 .navbar-brand img {
@@ -215,28 +247,32 @@ button ion-icon {
 .option-link:hover .option-radio-btn,
 .option-link:hover .option-name,
 .option-link:hover .option-price {
-    color: var(--secondary);
+    color: var(--tertiary);
+    font-weight: 700;
 }
 
 .option-link:focus,
 .option-link:focus .option-radio-btn,
 .option-link:focus .option-name,
 .option-link:focus .option-price {
-    color: var(--secondary);
+    color: var(--tertiary);
+    font-weight: 700;
 }
 
 .option-link:focus-within,
 .option-link:focus-within .option-radio-btn,
 .option-link:focus-within .option-name,
 .option-link:focus-within .option-price {
-    color: var(--secondary);
+    color: var(--tertiary);
+    font-weight: 700;
 }
 
 .option-item.selected .option-link,
 .option-item.selected .option-link .option-radio-btn,
 .option-item.selected .option-link .option-name,
 .option-item.selected .option-link .option-price {
-    color: var(--secondary);
+    color: var(--tertiary);
+    font-weight: 700;
 }
 
 .option-item.selected .option-link:hover,
@@ -291,4 +327,79 @@ span.icon ion-icon {
 
 .signup-link:hover {
     color: var(--tertiary);
+}
+
+.cart-table {
+    border: 0;
+    background-color: var(--primary);
+    color: var(--tertiary);
+}
+
+.cart-table th {
+    border-bottom: 2px solid var(--tertiary);
+    color: var(--tertiary);
+    text-transform: uppercase;
+}
+
+.cart-table td,
+.cart-table th {
+    vertical-align: middle;
+}
+
+.cart-table tbody td {
+    border-color: var(--tertiary);
+}
+
+.cart-table tfoot td,
+.cart-table tfoot th {
+    border-top: 2px solid var(--tertiary);
+}
+
+.cart-table tfoot th {
+    color: var(--tertiary);
+}
+
+.cart-quantity-form,
+.cart-remove-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.cart-quantity-input.input {
+    width: 4.5rem;
+    height: 2.5rem;
+    border-color: var(--grey-tint-1);
+    border-radius: 999px;
+    color: var(--tertiary);
+    text-align: center;
+}
+
+.cart-quantity-input.input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 0.125em rgba(240, 110, 90, 0.2);
+}
+
+.cart-update-button.button,
+.cart-remove-button.button {
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cart-remove-button.button {
+    border-color: var(--secondary);
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.cart-remove-button.button:hover,
+.cart-remove-button.button:focus {
+    border-color: var(--secondary);
+    background-color: transparent;
+    color: var(--secondary);
 }

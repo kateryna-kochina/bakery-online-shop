@@ -13,52 +13,34 @@ from .user.routes import user_bp
 
 def create_app():
     app = Flask(__name__)
+    app.config.from_object(Config)
 
-    try:
-        app.config.from_object(Config)
+    if not app.config['SECRET_KEY']:
+        raise RuntimeError('SECRET_KEY must be configured before starting the app.')
 
-        # Set secret key
-        app.secret_key = app.config['SECRET_KEY']
+    # Set up a login manager to handle user authentication
+    login_manager.init_app(app)
+    login_manager.login_view = 'user.login'
+    login_manager.login_message_category = 'error'
 
-        # Set up a login manager to handle user authentication
-        login_manager.init_app(app)
+    # Set up database
+    db.init_app(app)
+    setup_database(app)
 
-        # Set up database
-        app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
-        db.init_app(app)
-        setup_database(app)
-        print('Database initialized successfully.')
+    # Register blueprints
+    app.register_blueprint(general_bp)
+    app.register_blueprint(products_bp)
+    app.register_blueprint(user_bp)
+    app.register_blueprint(cart_bp)
 
-        # Register blueprints
-        app.register_blueprint(general_bp)
-        app.register_blueprint(products_bp)
-        app.register_blueprint(user_bp)
-        app.register_blueprint(cart_bp)
-        print('Blueprints registered successfully.')
-
-        return app
-
-    except Exception as e:
-        print(f'Error occurred during app initialization: {e}')
-
-        return None
+    return app
 
 
 def setup_database(app):
     from .products.models import Category, Option, Product
 
     with app.app_context():
-        try:
-            db.create_all()
-            print('Database tables created successfully.')
+        db.create_all()
 
-            if Category.query.count() == 0:
-                populate_database()
-                db.session.commit()
-                print('Database populated with data.')
-            else:
-                print('Database already populated.')
-
-        except Exception as e:
-            db.session.rollback()
-            print('Error setting up database:', e)
+        if Category.query.count() == 0:
+            populate_database()

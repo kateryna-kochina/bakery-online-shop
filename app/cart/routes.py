@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
@@ -18,14 +20,13 @@ def view_cart():
     # Retrieve the current user's cart
     user_cart = Cart.query.filter_by(user_id=current_user.id).first()
 
-    if user_cart:
+    if user_cart and user_cart.items:
         cart_items = []
+        cart_total = Decimal('0.00')
         forms = []
         remove_item_forms = []
 
         for item in user_cart.items:
-            print(item.id)
-
             form = UpdateQuantity(prefix=str(item.id))
             form.cart_item_id.data = item.id
             forms.append(form)
@@ -37,6 +38,8 @@ def view_cart():
             product = Product.query.get(item.product_id)
             option = Option.query.get(item.option_id)
             unit_price = calculate_unit_price(product, option)
+            line_total = unit_price * item.quantity
+            cart_total += line_total
             cart_items.append({
                 'product_title': product.title,
                 'product_img': product.img_path,
@@ -44,7 +47,7 @@ def view_cart():
                 'coefficient': option.coefficient,
                 'quantity': item.quantity,
                 'price': '{:.2f}'.format(unit_price),
-                'sum': '{:.2f}'.format(unit_price * item.quantity),
+                'sum': '{:.2f}'.format(line_total),
                 'cart_item_id': item.id
             })
 
@@ -87,7 +90,8 @@ def view_cart():
         return render_template('cart/cart.html',
                                forms=forms,
                                remove_item_forms=remove_item_forms,
-                               cart_items=cart_items)
+                               cart_items=cart_items,
+                               cart_total='{:.2f}'.format(cart_total))
 
     # If user's cart is empty, return an empty cart
     return render_template('cart/empty_cart.html')

@@ -1,1 +1,15 @@
-<h1>CART IS EMPTY</h1>
+{% extends 'general/base.html' %}
+
+{% block content %}
+<section class="hero is-fullheight is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="is-size-2 mb-4 is-secondary-color is-uppercase">Your cart is empty</h1>
+            <p class="is-size-5 mb-6">Choose something freshly baked to add to your order.</p>
+            <a class="button is-primary is-rounded is-outlined" href="{{ url_for('products.show_products') }}">
+                <strong>BROWSE PRODUCTS</strong>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

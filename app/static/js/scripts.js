@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  document.querySelectorAll('[data-auto-dismiss]').forEach(notification => {
+    const dismiss = () => notification.remove();
+    const dismissButton = notification.querySelector('.delete');
+
+    dismissButton?.addEventListener('click', dismiss);
+    window.setTimeout(dismiss, 5000);
+  });
 });
 
 // Set option id to hidden input value with selected_option id

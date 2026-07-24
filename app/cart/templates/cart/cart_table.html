@@ -1,24 +1,20 @@
-<table class="table is-fullwidth has-text-centered">
+<table class="table cart-table is-fullwidth has-text-centered">
     <thead>
         <tr>
-            <th class="has-text-centered">product_img</th>
-            <th class="has-text-centered">product_title</th>
-            <th class="has-text-centered">option</th>
-            <th class="has-text-centered">price</th>
-            <th class="has-text-centered">quantity</th>
-            <th class="has-text-centered">sum</th>
-            <th class="has-text-centered">delete</th>
+            <th class="has-text-centered">Image</th>
+            <th class="has-text-centered">Product</th>
+            <th class="has-text-centered">Option</th>
+            <th class="has-text-centered">Price</th>
+            <th class="has-text-centered">Quantity</th>
+            <th class="has-text-centered">Subtotal</th>
+            <th class="has-text-centered"></th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>sum</td>
-            <td></td>
+            <td colspan="5"></td>
+            <th class="has-text-right">Total</th>
+            <th>${{ cart_total }}</th>
         </tr>
     </tfoot>
     <tbody>
@@ -27,32 +23,31 @@
             {% set cart_item = cart_items[index] %}
             {% set form = forms[index] %}
             {% set remove_item_form = remove_item_forms[index] %}
-            <form method="POST">
-                {{ form.hidden_tag() }}
-
-                <td class="is-flex is-justify-content-center">
-                    <figure class="image is-128x128 is-centered">
-                        <img
-                            src="{{ url_for('static', filename=cart_item.product_img) }}"
-                            alt="{{ cart_item.product_title | replace(' ','-') | lower }}-img"
-                        />
-                    </figure>
-                </td>
-                <td>{{ cart_item.product_title }}</td>
-                <td>{{ cart_item.option_name }}</td>
-                <td>${{ cart_item.price }}</td>
-                <td>
-                    {{ form.quantity(value=cart_item.quantity) }}
-                    {{ form.update_btn() }}
-
-                </td>
-                <td>${{ cart_item.sum }}</td>
-            </form>
-            
-            <form method="POST">
-                {{ remove_item_form.hidden_tag() }}
-                <td>{{ remove_item_form.remove_btn() }}</td>
-            </form>
+            <td class="is-flex is-justify-content-center">
+                <figure class="image is-128x128 is-centered">
+                    <img
+                        src="{{ url_for('static', filename=cart_item.product_img) }}"
+                        alt="{{ cart_item.product_title | replace(' ','-') | lower }}-img"
+                    />
+                </figure>
+            </td>
+            <td>{{ cart_item.product_title }}</td>
+            <td>{{ cart_item.option_name }}</td>
+            <td>${{ cart_item.price }}</td>
+            <td>
+                <form method="POST" class="cart-quantity-form">
+                    {{ form.hidden_tag() }}
+                    {{ form.quantity(class="input cart-quantity-input", value=cart_item.quantity) }}
+                    {{ form.update_btn(class="button is-primary is-rounded is-outlined cart-update-button", value="Update") }}
+                </form>
+            </td>
+            <td>${{ cart_item.sum }}</td>
+            <td>
+                <form method="POST" class="cart-remove-form">
+                    {{ remove_item_form.hidden_tag() }}
+                    {{ remove_item_form.remove_btn(class="button is-rounded cart-remove-button", value="Remove") }}
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

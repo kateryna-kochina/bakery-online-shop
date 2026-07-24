@@ -18,3 +18,4 @@ class Config:
 
     # Database configuration
     SQLALCHEMY_DATABASE_URI = 'sqlite:///bakery.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
