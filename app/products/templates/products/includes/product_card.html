@@ -14,7 +14,7 @@
     <div class="columns is-aligned-top mt-1">
         <div class="column is-one-third has-text-left">
             <span class="card-content-item is-size-5 has-text-weight-bold"
-                >${{ product['price'] }}.00</span
+                >${{ "%.2f"|format(product['price']) }}</span
             >
         </div>
         <div class="column is-two-thirds has-text-right">

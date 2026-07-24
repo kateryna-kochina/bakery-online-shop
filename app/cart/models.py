@@ -16,7 +16,6 @@ class Cart(db.Model):
         item = CartItem(cart_id=self.id, product_id=product_id,
                         option_id=option_id, quantity=quantity)
         db.session.add(item)
-        db.session.commit()
 
     def remove_from_cart(self, item_id):
         item = CartItem.query.filter_by(cart_id=self.id, id=item_id).first()
@@ -24,14 +23,14 @@ class Cart(db.Model):
             return False
 
         db.session.delete(item)
-        db.session.commit()
         return True
 
     def update_quantity(self, item_id, new_quantity):
         item = CartItem.query.filter_by(cart_id=self.id, id=item_id).first()
         if item:
             item.quantity = new_quantity
-            db.session.commit()
+            return True
+        return False
 
 
 class CartItem(db.Model):

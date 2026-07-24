@@ -1,8 +1,10 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user
+from sqlalchemy.exc import SQLAlchemyError
 
 from ..cart.models import Cart
 from ..database import db
+from ..pricing import calculate_unit_price
 from .forms import AddToCart
 from .models import Category, Option, Product
 
@@ -14,38 +16,42 @@ def add_to_cart(form, product):
     quantity = form.quantity.data
     selected_option_id = form.selected_option.data
 
-    print(f'Quantity is: {quantity}')
-    print(f'Selected_option id is: {selected_option_id}')
-
-    # If selected_option is empty
     if not selected_option_id:
-        # Query for a option where category_id = category_id of currently displayed product and option coefficient = 1.0
-        default_option = db.session.query(Option).join(Category, Option.categories).filter(
-            Category.id == product.category_id, Option.coefficient == 1.0).first()
+        option = Option.query.filter(
+            Option.coefficient == 1,
+            Option.categories.any(Category.id == product.category_id)
+        ).first()
+    else:
+        try:
+            option_id = int(selected_option_id)
+        except (TypeError, ValueError):
+            option = None
+        else:
+            option = Option.query.filter(
+                Option.id == option_id,
+                Option.categories.any(Category.id == product.category_id)
+            ).first()
 
-        if default_option:
-            # Assign the id of default option with coefficient = 1.0
-            selected_option_id = default_option.id
-            print(
-                f'Option is not seleted, default_option id is: {selected_option_id}')
+    if option is None:
+        flash('The selected option is not available for this product.', 'error')
+        return None
 
-    # Check if the current user has a cart
-    cart = Cart.query.filter_by(user_id=current_user.id).first()
+    try:
+        cart = Cart.query.filter_by(user_id=current_user.id).first()
+        if cart is None:
+            cart = Cart(user_id=current_user.id)
+            db.session.add(cart)
+            db.session.flush()
 
-    # If the user doesn't have a cart, create one
-    if not cart:
-        cart = Cart(user_id=current_user.id)
-        db.session.add(cart)
+        cart.add_to_cart(
+            product_id=product.id,
+            option_id=option.id,
+            quantity=quantity)
         db.session.commit()
-
-    # Add the selected product to the cart db table
-    cart.add_to_cart(
-        product_id=product.id,
-        option_id=int(selected_option_id),
-        quantity=quantity)
-
-    print(
-        f'{product.title} [id: {product.id}] added to cart with option [id: {selected_option_id}] in amount of {quantity}. ')
+    except SQLAlchemyError:
+        db.session.rollback()
+        flash('Unable to add this item to your cart. Please try again.', 'error')
+        return None
 
     return redirect(url_for('cart.view_cart'))
 
@@ -166,21 +172,28 @@ def show_product_details(active_category, product_title):
 
         # Retrieve available options by category
         options = get_options(product.category_id)
+        option_prices = {
+            option.id: calculate_unit_price(product, option)
+            for option in options
+        }
 
         if form.validate_on_submit():
             if current_user.is_authenticated:  # Check if user is logged in
-                return add_to_cart(form, product)
+                cart_redirect = add_to_cart(form, product)
+                if cart_redirect:
+                    return cart_redirect
             else:
                 flash('Please log in to add items to your cart.', 'error')
                 # Redirect to login page if not logged in
                 return redirect(url_for('user.login'))
-        else:
-            return render_template('products/product.html',
-                                   product=product,
-                                   categories=categories,
-                                   active_category=active_category,
-                                   options=options,
-                                   form=form)
+
+        return render_template('products/product.html',
+                               product=product,
+                               categories=categories,
+                               active_category=active_category,
+                               options=options,
+                               option_prices=option_prices,
+                               form=form)
 
     else:
         # If product not found, redirect to products page

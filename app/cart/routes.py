@@ -1,7 +1,9 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
+from sqlalchemy.exc import SQLAlchemyError
 
 from ..database import db
+from ..pricing import calculate_unit_price
 from ..products.models import Option, Product
 from .forms import UpdateQuantity, RemoveCartItem
 from .models import Cart, CartItem
@@ -34,14 +36,15 @@ def view_cart():
 
             product = Product.query.get(item.product_id)
             option = Option.query.get(item.option_id)
+            unit_price = calculate_unit_price(product, option)
             cart_items.append({
                 'product_title': product.title,
                 'product_img': product.img_path,
                 'option_name': option.name,
                 'coefficient': option.coefficient,
                 'quantity': item.quantity,
-                'price': '{:.2f}'.format(product.price * option.coefficient),
-                'sum': '{:.2f}'.format(product.price * option.coefficient * item.quantity),
+                'price': '{:.2f}'.format(unit_price),
+                'sum': '{:.2f}'.format(unit_price * item.quantity),
                 'cart_item_id': item.id
             })
 
@@ -53,10 +56,14 @@ def view_cart():
                 if form.validate_on_submit():
                     item_id = form.cart_item_id.data
                     new_quantity = form.quantity.data
-                    user_cart.update_quantity(item_id, new_quantity)
-                    quantity_updated = True
-
-                    flash('Quantity updated successfully!', 'success')
+                    if user_cart.update_quantity(item_id, new_quantity):
+                        try:
+                            db.session.commit()
+                            quantity_updated = True
+                            flash('Quantity updated successfully!', 'success')
+                        except SQLAlchemyError:
+                            db.session.rollback()
+                            flash('Unable to update the item quantity.', 'error')
 
             # Process removal forms only if no quantity update form was submitted
             if not quantity_updated:
@@ -66,7 +73,12 @@ def view_cart():
                         item_removed = user_cart.remove_from_cart(item_id)
 
                         if item_removed:
-                            flash('Item deleted successfully!', 'success')
+                            try:
+                                db.session.commit()
+                                flash('Item deleted successfully!', 'success')
+                            except SQLAlchemyError:
+                                db.session.rollback()
+                                flash('Unable to remove the item.', 'error')
                         else:
                             flash('Item could not be found in your cart.', 'error')
 

@@ -67,8 +67,7 @@
                                         >{{ option.name }}</span
                                     >
                                     <span class="option-price is-block"
-                                        >${{ "%0.2f"|format((product.price *
-                                        option.coefficient)|float) }}</span
+                                        >${{ "%0.2f"|format(option_prices[option.id]) }}</span
                                     >
                                 </a>
                             </div>

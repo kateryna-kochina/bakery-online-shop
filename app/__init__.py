@@ -18,7 +18,7 @@ def create_app():
         app.config.from_object(Config)
 
         # Set secret key
-        app.secret_key = app.config['FLASK_SECRET_KEY']
+        app.secret_key = app.config['SECRET_KEY']
 
         # Set up a login manager to handle user authentication
         login_manager.init_app(app)

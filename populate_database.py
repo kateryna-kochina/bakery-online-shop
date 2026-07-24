@@ -1,4 +1,5 @@
 import csv
+from decimal import Decimal
 
 from app.cart.models import Cart, CartItem
 from app.database import db
@@ -26,7 +27,7 @@ def populate_database():
                     category_id = int(row['category_id'])
                     product = Product(
                         title=row['title'],
-                        price=int(row['price']),
+                        price=Decimal(row['price']),
                         img_path=row['img_path'],
                         description=row['description'],
                         category_id=category_id
@@ -39,7 +40,7 @@ def populate_database():
                 for row in reader:
                     option = Option(
                         name=row['name'],
-                        coefficient=float(row['coefficient'])
+                        coefficient=Decimal(row['coefficient'])
                     )
                     db.session.add(option)
 
